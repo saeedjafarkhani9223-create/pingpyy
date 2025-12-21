@@ -1,2 +1,141 @@
-# pingpyy
-pingpy
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خرید فیلترشکن پرسرعت | وی‌پی‌ان pingpy</title>
+    <style>
+        /* تنظیمات کلی صفحه */
+        body {
+            background-color: #0f172a; /* رنگ پس‌زمینه سرمه‌ای تیره */
+            color: #ffffff;
+            font-family: 'Tahoma', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        /* هدر یا بالای سایت */
+        header {
+            padding: 50px 20px;
+            background: linear-gradient(to bottom, #1e293b, #0f172a);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #38bdf8; /* آبی روشن */
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+        }
+
+        /* بخش قیمت‌ها */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px 20px;
+        }
+
+        .card {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 15px;
+            padding: 20px;
+            width: 250px;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .card:hover {
+            transform: translateY(-10px); /* حرکت به بالا موقع موس */
+            border-color: #38bdf8;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            color: #4ade80; /* سبز */
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        li {
+            padding: 5px 0;
+            border-bottom: 1px solid #334155;
+        }
+
+        /* دکمه خرید */
+        .btn {
+            background-color: #38bdf8;
+            color: #0f172a;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #0ea5e9;
+        }
+
+        /* فوتر */
+        footer {
+            padding: 20px;
+            background-color: #020617;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🚀 فیلترشکن پرسرعت pingpy</h1>
+        <p>بدون قطعی، آی‌پی ثابت، مناسب ترید و اینستاگرام</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>اشتراک ۱ ماهه</h2>
+            <div class="price">500,000 تومان</div>
+            <ul>
+                <li>✅ حجم 30گیگ</li>
+                <li>✅ تک کاربره</li>
+                <li>✅ آی‌پی ثابت آلمان</li>
+                <li>✅ پشتیبانی تلگرام</li>
+            </ul>
+            <a href="https://t.me/pingpy" class="btn">خرید آنلاین</a>
+        </div>
+
+        <div class="card">
+            <h2>اشتراک 15روزه</h2>
+            <div class="price">20,000 تومان</div>
+            <ul>
+                <li>✅ حجم 15 گیگ</li>
+                <li>✅ نک کاربره</li>
+                <li>✅ سرعت نور</li>
+                <li>✅ مناسب گیم</li>
+            </ul>
+            <a href="https://t.me/ID_TELEGRAM_SHOMA" class="btn">خرید آنلاین</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>طراحی شده برای عبور از محدودیت‌ها</p>
+    </footer>
+
+</body>
+</html>
