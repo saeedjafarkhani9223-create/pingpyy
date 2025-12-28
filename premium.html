@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>گالری شمع‌ها | فروشگاه غزل</title>
+    <title>اشتراک‌های پرمیوم | فروشگاه غزل</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap');
 
-        /* استایل‌ها شبیه صفحه قبل ولی متمرکز روی محصول */
         body {
             background-color: #0f0f1a;
             color: #ecf0f1;
@@ -17,30 +16,24 @@
             padding-bottom: 50px;
         }
 
+        /* هدر بنفش مخصوص بخش پرمیوم */
         header {
-            background: #d35400; /* رنگ نارنجی مخصوص شمع */
-            padding: 15px;
+            background: #8e44ad; 
+            padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 5px 15px rgba(211, 84, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(142, 68, 173, 0.3);
             position: sticky;
             top: 0;
             z-index: 100;
         }
 
         .back-btn {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            border: 2px solid white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            transition: 0.3s;
+            color: white; text-decoration: none; font-weight: bold;
+            border: 2px solid white; padding: 5px 15px; border-radius: 20px; transition: 0.3s;
         }
-        .back-btn:hover { background: white; color: #d35400; }
-
-        h1 { margin: 0; font-size: 1.2rem; }
+        .back-btn:hover { background: white; color: #8e44ad; }
 
         .container {
             padding: 40px 5%;
@@ -56,65 +49,85 @@
             overflow: hidden;
             text-align: center;
             transition: 0.3s;
+            display: flex;
+            flex-direction: column;
         }
-        .card:hover { transform: translateY(-5px); border-color: #d35400; }
+        .card:hover { transform: translateY(-5px); border-color: #8e44ad; }
+
+        /* --- قاب عکس برای لوگوها --- */
+        .image-box {
+            width: 100%;
+            height: 250px; /* ارتفاع مناسب لوگو */
+            background-color: #1a1a2e; /* پس‌زمینه تیره شیک */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
 
         .product-img {
             width: 100%;
-            height: 300px;
-            object-fit: cover;
+            height: 100%;
+            object-fit: cover; /* عکس کامل قاب را پر میکند */
         }
 
-        .content { padding: 20px; }
-        .price { color: #e67e22; font-weight: bold; font-size: 1.2rem; display: block; margin: 10px 0; }
+        .content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;}
+        
+        .price { 
+            color: #9b59b6; font-weight: bold; font-size: 1.2rem; display: block; 
+            margin: 15px 0; background: rgba(142, 68, 173, 0.1); padding: 5px; border-radius: 5px;
+        }
         
         .btn {
-            display: block;
-            background: #d35400;
-            color: white;
-            padding: 10px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
+            display: block; background: #8e44ad; color: white; padding: 10px;
+            text-decoration: none; border-radius: 5px; font-weight: bold; transition: 0.3s;
         }
+        .btn:hover { background: #9b59b6; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>🕯️ بخش شمع‌های دست‌ساز</h1>
+        <h1>🤖 اکانت‌های هوش مصنوعی</h1>
         <a href="index.html" class="back-btn"><i class="fas fa-arrow-right"></i> بازگشت</a>
     </header>
 
     <div class="container">
         
         <div class="card">
-            <img src="images/GEMINI">
+            <div class="image-box">
+                <img src="images/gemini.jpg" class="product-img" alt="Gemini Advanced">
+            </div>
             <div class="content">
-                <h3>اشتراک سالانه جیمینای</h3>
-                <p>ساخته شده با موم طبیعی</p>
-                <span class="price">1000,0000 تومان</span>
-                <a href="#" class="btn">سفارش</a>
+                <h3>Google Gemini Advanced</h3>
+                <p>هوش مصنوعی گوگل (مدل Ultra 1.0)</p>
+                <span class="price">950,000 تومان</span>
+                <a href="#" class="btn">خرید اشتراک</a>
             </div>
         </div>
 
         <div class="card">
-            <img src="images/5918254360691412130_121.jpg" class="product-img">
+            <div class="image-box">
+                <img src="https://via.placeholder.com/400x300?text=ChatGPT+Plus" class="product-img" alt="ChatGPT">
+            </div>
             <div class="content">
-                <h3>شمع مدرن</h3>
-                <p>بدون دود و با رایحه عالی</p>
-                <span class="price">180,000 تومان</span>
-                <a href="#" class="btn">سفارش</a>
+                <h3>ChatGPT Plus</h3>
+                <p>اشتراک قانونی GPT-4o (یک ماهه)</p>
+                <span class="price">980,000 تومان</span>
+                <a href="#" class="btn">خرید اشتراک</a>
             </div>
         </div>
 
         <div class="card">
-            <img src="https://via.placeholder.com/400x400" class="product-img">
+            <div class="image-box">
+                <img src="https://via.placeholder.com/400x300?text=Midjourney" class="product-img" alt="Midjourney">
+            </div>
             <div class="content">
-                <h3>شمع لیوانی</h3>
-                <p>توضیحات...</p>
-                <span class="price">قیمت...</span>
-                <a href="#" class="btn">سفارش</a>
+                <h3>Midjourney Pro</h3>
+                <p>ساخت نامحدود عکس با کیفیت بالا</p>
+                <span class="price">550,000 تومان</span>
+                <a href="#" class="btn">خرید اشتراک</a>
             </div>
         </div>
 
