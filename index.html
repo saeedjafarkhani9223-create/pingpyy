@@ -8,6 +8,10 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap');
 
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             margin: 0;
             padding: 0;
@@ -17,12 +21,10 @@
             height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden; /* جلوگیری از اسکرول */
+            overflow: hidden; /* جلوگیری از اسکرول اضافه */
         }
 
-        /* پس زمینه عکس کل صفحه */
+        /* پس زمینه */
         .bg-image {
             position: absolute;
             top: 0;
@@ -33,22 +35,109 @@
             background-size: cover;
             background-position: center;
             z-index: -1;
-            filter: blur(5px); /* تار کردن پس زمینه برای تمرکز */
+            filter: blur(5px);
         }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 50px;
-            text-shadow: 0 0 10px rgba(142, 68, 173, 0.8);
+        /* --- استایل هدر و منو --- */
+        header {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
+
+        .logo { font-size: 1.5rem; font-weight: bold; color: white; }
+        .logo span { color: #d35400; }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+            position: relative; /* برای منوی بازشو مهم است */
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            font-size: 1rem;
+            display: block;
+            padding: 5px 10px;
+        }
+
+        nav a:hover { color: #d35400; }
+
+        /* --- استایل منوی بازشو (Dropdown) --- */
+        .dropdown-content {
+            display: none; /* اولش مخفیه */
+            position: absolute;
+            background-color: rgba(30, 30, 40, 0.95);
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+            border-radius: 10px;
+            top: 100%; /* میچسبه زیر منو */
+            left: 0;
+            z-index: 1;
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            color: #ecf0f1;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: flex; /* برای چیدمان آیکون و متن */
+            align-items: center;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .dropdown-content a i { margin-left: 10px; width: 20px; text-align: center;}
+
+        .dropdown-content a:hover {
+            background-color: #d35400;
+            color: white;
+        }
+
+        /* وقتی موس میره روی تماس با ما، لیست باز بشه */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+
+        /* --- بدنه اصلی --- */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 60px; /* فاصله از هدر */
+        }
+
+        h1 { font-size: 3rem; margin-bottom: 40px; text-shadow: 0 0 10px rgba(142, 68, 173, 0.8); }
         h1 span { color: #d35400; }
 
         .container {
             display: flex;
-            gap: 40px;
+            gap: 30px;
             flex-wrap: wrap;
             justify-content: center;
-            z-index: 10;
         }
 
         .category-card {
@@ -56,46 +145,29 @@
             backdrop-filter: blur(10px);
             border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            width: 300px;
-            padding: 40px 20px;
+            width: 280px;
+            padding: 30px 20px;
             text-align: center;
             transition: 0.4s;
             cursor: pointer;
             text-decoration: none;
             color: white;
-            position: relative;
-            overflow: hidden;
         }
 
         .category-card:hover {
-            transform: translateY(-15px) scale(1.05);
+            transform: translateY(-10px);
             background: rgba(255, 255, 255, 0.15);
-            border-color: var(--color);
-            box-shadow: 0 0 30px var(--glow);
         }
 
-        .category-card i {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            color: var(--color);
-        }
+        .category-card i { font-size: 3.5rem; margin-bottom: 20px; }
+        .candle-card i { color: #d35400; }
+        .premium-card i { color: #8e44ad; }
 
-        .category-card h2 { font-size: 1.8rem; margin-bottom: 10px; }
-        .category-card p { color: #ccc; font-size: 0.9rem; }
-
-        /* استایل اختصاصی هر کارت */
-        .candle-card { --color: #d35400; --glow: rgba(211, 84, 0, 0.6); }
-        .premium-card { --color: #8e44ad; --glow: rgba(142, 68, 173, 0.6); }
-
-        footer {
-            position: absolute;
-            bottom: 20px;
-            font-size: 0.8rem;
-            color: #777;
-        }
+        footer { margin-bottom: 20px; font-size: 0.8rem; color: #aaa; text-align: center; }
 
         @media (max-width: 768px) {
-            .container { flex-direction: column; }
+            header { padding: 10px 20px; }
+            .dropdown-content { right: 0; left: auto; } /* در موبایل منو از کادر بیرون نزنه */
             h1 { font-size: 2rem; }
         }
     </style>
@@ -104,23 +176,52 @@
 
     <div class="bg-image"></div>
 
-    <h1>فروشگاه <span>غزل</span></h1>
+    <header>
+        <div class="logo">GHAZAL <span>PY</span></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">صفحه نخست</a></li>
+                
+                <li><a href="candles.html">شمع‌ها</a></li>
+                <li><a href="premium.html">اشتراک</a></li>
+                
+                <li class="dropdown">
+                    <a href="#" style="cursor: default;">تماس با ما <i class="fas fa-angle-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="https://t.me/GhazalCandle" target="_blank">
+                            <i class="fab fa-telegram"></i> @GhazalCandle
+                        </a>
+                        <a href="https://t.me/Pingpay7" target="_blank">
+                            <i class="fab fa-telegram-plane"></i> @Pingpay7
+                        </a>
+                        <a href="mailto:tjsbneh@gmail.com">
+                            <i class="fas fa-envelope"></i> tjsbneh@gmail.com
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
 
-    <div class="container">
-        <a href="candles.html" class="category-card candle-card">
-            <i class="fas fa-fire"></i>
-            <h2>شمع‌های دست‌ساز</h2>
-            <p>مشاهده گالری شمع‌های معطر و تزئینی</p>
-        </a>
+    <div class="main-content">
+        <h1>فروشگاه هنری <span>غزل</span></h1>
 
-        <a href="premium.html" class="category-card premium-card">
-            <i class="fas fa-crown"></i>
-            <h2>اشتراک‌های پرمیوم</h2>
-            <p>اکانت هوش مصنوعی، اسپاتیفای و...</p>
-        </a>
+        <div class="container">
+            <a href="candles.html" class="category-card candle-card">
+                <i class="fas fa-fire"></i>
+                <h2>شمع‌های دست‌ساز</h2>
+                <p>مشاهده گالری هنری</p>
+            </a>
+
+            <a href="premium.html" class="category-card premium-card">
+                <i class="fas fa-crown"></i>
+                <h2>اشتراک‌های پرمیوم</h2>
+                <p>اکانت هوش مصنوعی و...</p>
+            </a>
+        </div>
     </div>
 
-    <footer>طراحی شده توسط تیم pingpy</footer>
+    <footer>طراحی شده با ❤️ توسط سعید جعفرخانی</footer>
 
 </body>
 </html>
