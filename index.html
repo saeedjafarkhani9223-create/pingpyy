@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فروشگاه غزل | انتخاب دسته بندی</title>
+    <title>فروشگاه غزل | انتخاب خدمات</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap');
 
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
@@ -18,31 +16,31 @@
             font-family: 'Vazirmatn', sans-serif;
             background-color: #0f0f1a;
             color: white;
-            height: 100vh;
+            min-height: 100vh; /* تغییر به min-height برای اسکرول در صورت نیاز */
             display: flex;
             flex-direction: column;
-            overflow: hidden; /* جلوگیری از اسکرول اضافه */
+            overflow-x: hidden;
         }
 
         /* پس زمینه */
         .bg-image {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(15, 15, 26, 0.85), rgba(15, 15, 26, 0.95)), url('https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=1920');
+            background: linear-gradient(rgba(15, 15, 26, 0.9), rgba(15, 15, 26, 0.95)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1920');
             background-size: cover;
             background-position: center;
             z-index: -1;
-            filter: blur(5px);
+            filter: blur(3px);
         }
 
-        /* --- استایل هدر و منو --- */
+        /* --- استایل هدر --- */
         header {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            padding: 15px 50px;
+            background: rgba(30, 30, 40, 0.8);
+            backdrop-filter: blur(15px);
+            padding: 10px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -53,7 +51,7 @@
             z-index: 1000;
         }
 
-        .logo { font-size: 1.5rem; font-weight: bold; color: white; }
+        .logo { font-size: 1.4rem; font-weight: bold; color: white; }
         .logo span { color: #d35400; }
 
         nav ul {
@@ -62,64 +60,48 @@
             margin: 0;
             padding: 0;
             align-items: center;
+            flex-wrap: wrap; /* در موبایل بشکنه خط بعد */
         }
 
-        nav ul li {
-            margin: 0 15px;
-            position: relative; /* برای منوی بازشو مهم است */
-        }
+        nav ul li { margin: 0 10px; position: relative; }
 
         nav a {
-            color: white;
+            color: #ddd;
             text-decoration: none;
             font-weight: bold;
             transition: 0.3s;
-            font-size: 1rem;
-            display: block;
-            padding: 5px 10px;
+            font-size: 0.9rem;
+            padding: 5px 8px;
+            border-radius: 5px;
         }
 
-        nav a:hover { color: #d35400; }
+        nav a:hover { color: white; background: rgba(255,255,255,0.1); }
 
-        /* --- استایل منوی بازشو (Dropdown) --- */
+        /* --- منوی بازشو --- */
         .dropdown-content {
-            display: none; /* اولش مخفیه */
+            display: none;
             position: absolute;
-            background-color: rgba(30, 30, 40, 0.95);
-            min-width: 220px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+            background-color: #1e1e28;
+            min-width: 200px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
             border-radius: 10px;
-            top: 100%; /* میچسبه زیر منو */
+            top: 100%;
             left: 0;
-            z-index: 1;
+            z-index: 2000;
             border: 1px solid rgba(255,255,255,0.1);
-            overflow: hidden;
         }
 
         .dropdown-content a {
-            color: #ecf0f1;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: flex; /* برای چیدمان آیکون و متن */
+            display: flex;
             align-items: center;
-            font-size: 0.9rem;
+            padding: 12px;
             border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: #ccc;
         }
+        .dropdown-content a:hover { background: #d35400; color: white; }
+        .dropdown:hover .dropdown-content { display: block; }
 
-        .dropdown-content a i { margin-left: 10px; width: 20px; text-align: center;}
-
-        .dropdown-content a:hover {
-            background-color: #d35400;
-            color: white;
-        }
-
-        /* وقتی موس میره روی تماس با ما، لیست باز بشه */
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-
-        /* --- بدنه اصلی --- */
+        /* --- محتوای اصلی --- */
         .main-content {
             flex-grow: 1;
             display: flex;
@@ -127,48 +109,62 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            margin-top: 60px; /* فاصله از هدر */
+            margin-top: 80px; /* فاصله از هدر */
+            padding: 20px;
         }
 
-        h1 { font-size: 3rem; margin-bottom: 40px; text-shadow: 0 0 10px rgba(142, 68, 173, 0.8); }
+        h1 { font-size: 2.5rem; margin-bottom: 40px; }
         h1 span { color: #d35400; }
 
         .container {
             display: flex;
-            gap: 30px;
+            gap: 25px;
             flex-wrap: wrap;
             justify-content: center;
+            max-width: 1200px;
         }
 
         .category-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            width: 280px;
+            width: 260px;
             padding: 30px 20px;
             text-align: center;
             transition: 0.4s;
             cursor: pointer;
             text-decoration: none;
             color: white;
+            position: relative;
+            overflow: hidden;
         }
 
         .category-card:hover {
             transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        .category-card i { font-size: 3.5rem; margin-bottom: 20px; }
-        .candle-card i { color: #d35400; }
-        .premium-card i { color: #8e44ad; }
+        .category-card i { font-size: 3rem; margin-bottom: 20px; color: var(--color); transition: 0.3s;}
+        .category-card:hover i { transform: scale(1.1); }
+        .category-card h2 { font-size: 1.3rem; margin-bottom: 10px; }
+        .category-card p { color: #aaa; font-size: 0.85rem; }
 
-        footer { margin-bottom: 20px; font-size: 0.8rem; color: #aaa; text-align: center; }
+        /* رنگ‌های اختصاصی */
+        .card-candle { --color: #d35400; }  /* نارنجی */
+        .card-premium { --color: #8e44ad; } /* بنفش */
+        .card-master { --color: #27ae60; }  /* سبز */
+        .card-freelance { --color: #3498db; } /* آبی */
+
+        footer { padding: 20px; font-size: 0.8rem; color: #777; text-align: center; margin-top: auto;}
 
         @media (max-width: 768px) {
-            header { padding: 10px 20px; }
-            .dropdown-content { right: 0; left: auto; } /* در موبایل منو از کادر بیرون نزنه */
-            h1 { font-size: 2rem; }
+            h1 { font-size: 1.8rem; }
+            nav ul { display: none; } /* فعلا منو رو در موبایل ساده کردیم یا باید همبرگری بشه */
+            /* اگر میخوای منو تو موبایل هم باشه خط بالا رو پاک کن ولی ممکنه جا نشه */
+            nav ul { display: flex; justify-content: center; font-size: 0.8rem;}
+            nav a { padding: 5px; }
         }
     </style>
 </head>
@@ -180,23 +176,17 @@
         <div class="logo">GHAZAL <span>PY</span></div>
         <nav>
             <ul>
-                <li><a href="index.html">صفحه نخست</a></li>
-                
                 <li><a href="candles.html">شمع‌ها</a></li>
                 <li><a href="premium.html">اشتراک</a></li>
+                <li><a href="mastercard.html">مسترکارت</a></li>
+                <li><a href="freelance.html">فریلنسری</a></li>
                 
                 <li class="dropdown">
-                    <a href="#" style="cursor: default;">تماس با ما <i class="fas fa-angle-down"></i></a>
+                    <a href="#" style="color: #f1c40f;">تماس با ما <i class="fas fa-angle-down"></i></a>
                     <div class="dropdown-content">
-                        <a href="https://t.me/GhazalCandle" target="_blank">
-                            <i class="fab fa-telegram"></i> @GhazalCandle
-                        </a>
-                        <a href="https://t.me/Pingpay7" target="_blank">
-                            <i class="fab fa-telegram-plane"></i> @Pingpay7
-                        </a>
-                        <a href="mailto:tjsbneh@gmail.com">
-                            <i class="fas fa-envelope"></i> tjsbneh@gmail.com
-                        </a>
+                        <a href="https://t.me/GhazalCandle" target="_blank"><i class="fab fa-telegram"></i> @GhazalCandle</a>
+                        <a href="https://t.me/Pingpay7" target="_blank"><i class="fab fa-telegram-plane"></i> @Pingpay7</a>
+                        <a href="mailto:tjsbneh@gmail.com"><i class="fas fa-envelope"></i> ایمیل ما</a>
                     </div>
                 </li>
             </ul>
@@ -204,24 +194,36 @@
     </header>
 
     <div class="main-content">
-        <h1>فروشگاه هنری <span>غزل</span></h1>
+        <h1>خدمات آنلاین و هنری <span>غزل</span></h1>
 
         <div class="container">
-            <a href="candles.html" class="category-card candle-card">
+            <a href="candles.html" class="category-card card-candle">
                 <i class="fas fa-fire"></i>
                 <h2>شمع‌های دست‌ساز</h2>
-                <p>مشاهده گالری هنری</p>
+                <p>خرید انواع شمع معطر و تزئینی</p>
             </a>
 
-            <a href="premium.html" class="category-card premium-card">
+            <a href="premium.html" class="category-card card-premium">
                 <i class="fas fa-crown"></i>
                 <h2>اشتراک‌های پرمیوم</h2>
-                <p>اکانت هوش مصنوعی و...</p>
+                <p>هوش مصنوعی، اسپاتیفای و...</p>
+            </a>
+
+            <a href="mastercard.html" class="category-card card-master">
+                <i class="fab fa-cc-mastercard"></i>
+                <h2>صدور مسترکارت</h2>
+                <p>پرداخت ارزی و خریدهای خارجی</p>
+            </a>
+
+            <a href="freelance.html" class="category-card card-freelance">
+                <i class="fas fa-laptop-code"></i>
+                <h2>خدمات فریلنسری</h2>
+                <p>برنامه‌نویسی، طراحی و پروژه</p>
             </a>
         </div>
     </div>
 
-    <footer>طراحی شده با ❤️ توسط سعید جعفرخانی</footer>
+    <footer>طراحی و توسعه با ❤️ توسط سعید جعفرخانی</footer>
 
 </body>
 </html>
