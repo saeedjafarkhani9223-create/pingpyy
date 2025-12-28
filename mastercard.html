@@ -33,7 +33,9 @@
             border: 2px solid white;
             padding: 5px 15px;
             border-radius: 20px;
+            transition: 0.3s;
         }
+        .back-btn:hover { background: white; color: #27ae60; }
 
         .container {
             display: flex;
@@ -70,6 +72,10 @@
             border-radius: 10px;
             margin-bottom: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            background: white; 
+            padding: 20px;
+            height: 160px; /* ارتفاع ثابت برای یکدست شدن */
+            object-fit: contain;
         }
 
         .card-box h2 { margin: 10px 0; font-size: 1.5rem; }
@@ -77,7 +83,7 @@
         .price {
             display: block;
             color: #2ecc71;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
             margin-top: 10px;
             background: rgba(46, 204, 113, 0.1);
@@ -93,7 +99,9 @@
             padding: 10px;
             border-radius: 50px;
             font-weight: bold;
+            transition: 0.3s;
         }
+        .card-box:hover .btn-select { background: #2ecc71; }
 
     </style>
 </head>
@@ -101,13 +109,13 @@
 
     <header>
         <h1>💳 صدور کارت ارزی</h1>
-        <a href="index.html" class="back-btn">بازگشت</a>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-right"></i> بازگشت</a>
     </header>
 
     <div class="container">
         
-        <a href="#" class="card-box" onclick="alert('درگاه پرداخت ویزا به زودی فعال می‌شود!')">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa Card" class="card-img" style="background: white; padding: 20px;">
+        <a href="visa-buy.html" class="card-box">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa Card" class="card-img">
             <h2>ویزا کارت مجازی</h2>
             <p>مناسب خریدهای بین‌المللی</p>
             <span class="price">شروع از 1,000,000 تومان</span>
@@ -115,7 +123,7 @@
         </a>
 
         <a href="mastercard-buy.html" class="card-box">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg" alt="Mastercard" class="card-img" style="background: white; padding: 20px;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg" alt="Mastercard" class="card-img">
             <h2>مسترکارت مجازی</h2>
             <p>تحویل آنی با پنل اختصاصی</p>
             <span class="price">شروع از 200,000 تومان</span>
