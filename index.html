@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فروشگاه غزل | شمع‌های دست‌ساز</title>
+    <title>فروشگاه غزل | شمع و اشتراک پرمیوم</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap');
 
         :root {
             --primary: #8e44ad;
-            --secondary: #d35400; /* نارنجی آجری */
+            --secondary: #d35400;
             --dark: #0f0f1a;
             --light: #ecf0f1;
         }
@@ -29,7 +29,7 @@
             line-height: 1.6;
         }
 
-        /* Header Navbar */
+        /* Header */
         header {
             background: rgba(15, 15, 26, 0.95);
             padding: 1rem 5%;
@@ -48,9 +48,10 @@
 
         nav ul { display: flex; list-style: none; }
         nav ul li { margin: 0 15px; }
-        nav a { color: var(--light); text-decoration: none; font-weight: bold; }
+        nav a { color: var(--light); text-decoration: none; font-weight: bold; transition: 0.3s;}
+        nav a:hover { color: var(--secondary); }
 
-        /* Hero Section */
+        /* Hero */
         .hero {
             height: 80vh;
             display: flex;
@@ -58,7 +59,6 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            /* اگر خواستی عکس پس‌زمینه هدر را عوض کنی، آدرس زیر را تغییر بده */
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1603006905003-be475563bc59?q=80&w=1920');
             background-size: cover;
             background-position: center;
@@ -67,7 +67,7 @@
         .hero h1 { font-size: 3rem; margin-bottom: 20px; }
         .hero span { color: var(--secondary); }
 
-        /* Product Section */
+        /* General Sections */
         section { padding: 80px 10%; }
         .section-title { text-align: center; margin-bottom: 50px; font-size: 2rem; }
         .section-title span { color: var(--secondary); border-bottom: 3px solid var(--secondary); padding-bottom: 10px; }
@@ -78,6 +78,7 @@
             gap: 30px;
         }
 
+        /* Card Styles */
         .card {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
@@ -85,43 +86,51 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             transition: 0.3s;
             text-align: center;
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover { transform: translateY(-5px); border-color: var(--secondary); }
 
         .product-img {
             width: 100%;
-            height: 300px; /* ارتفاع عکس‌ها */
+            height: 250px;
             object-fit: cover;
+            background-color: #2c2c2c; /* رنگ پس زمینه برای وقتی عکس نیست */
         }
 
-        .card-content { padding: 20px; }
-        .card h3 { margin-bottom: 10px; }
+        .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .card h3 { margin-bottom: 10px; color: #fff; }
+        .card p { color: #bdc3c7; margin-bottom: 15px; font-size: 0.9rem; }
         
         .price {
             display: block;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--secondary);
             font-weight: bold;
-            margin: 15px 0;
+            margin: 10px 0 20px 0;
             background: rgba(211, 84, 0, 0.1);
-            padding: 5px;
+            padding: 8px;
             border-radius: 5px;
         }
 
         .btn {
-            display: inline-block;
-            padding: 10px 25px;
+            display: block;
+            width: 100%;
+            padding: 10px 0;
             background: var(--secondary);
             color: white;
             text-decoration: none;
             border-radius: 5px;
             font-weight: bold;
+            transition: 0.3s;
         }
         .btn:hover { background: #e67e22; }
 
         footer { text-align: center; padding: 30px; margin-top: 50px; background: #050505; color: #777; }
 
+        /* راهنما برای کاربر (فقط در کد دیده می‌شود اما اینجا رنگش را مشخص کردم که راحت پیدا کنی) */
+        /* Placeholder styling text */
     </style>
 </head>
 <body>
@@ -130,16 +139,16 @@
         <div class="logo">GHAZAL <span>PY</span></div>
         <nav>
             <ul>
-                <li><a href="#candles">محصولات شمع</a></li>
-                <li><a href="#ai">هوش مصنوعی</a></li>
+                <li><a href="#candles">شمع‌ها</a></li>
+                <li><a href="#premium">اشتراک‌های پرمیوم</a></li>
                 <li><a href="#mastercard">خدمات ارزی</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="hero">
-        <h1>فروشگاه هنری <span>غزل</span></h1>
-        <p>شمع‌های دست‌ساز با بهترین کیفیت</p>
+        <h1>فروشگاه هنری و دیجیتال <span>غزل</span></h1>
+        <p>هنر دست و تکنولوژی روز در یک قاب</p>
     </section>
 
     <section id="candles">
@@ -147,37 +156,31 @@
         <div class="container">
             
             <div class="card">
-                <img src="images/5940799009100336312_121.jpg" alt="شمع شماره 1" class="product-img">
+                <img src="images/5940799009100336312_121.jpg" alt="شمع ۱" class="product-img">
                 <div class="card-content">
-                    <h3>شمع طرح جدید</h3>
-                    <p>توضیحات کوتاه درباره شمع...</p>
-                    
-                    <span class="price">قیمت گذاشته شود</span>
-                    
+                    <h3>شمع طرح کلاسیک</h3>
+                    <p>توضیحات محصول نوشته شود...</p>
+                    <span class="price">قیمت نوشته شود</span>
                     <a href="#" class="btn">سفارش</a>
                 </div>
             </div>
 
             <div class="card">
-                <img src="https://via.placeholder.com/300x300?text=No+Image" alt="محصول 2" class="product-img">
+                <img src="images/5918254360691412130_121.jpg" alt="شمع ۲" class="product-img">
                 <div class="card-content">
-                    <h3>شمع شماره 2</h3>
-                    <p>توضیحات محصول...</p>
-                    
-                    <span class="price">قیمت گذاشته شود</span>
-                    
+                    <h3>شمع طرح مدرن</h3>
+                    <p>توضیحات محصول نوشته شود...</p>
+                    <span class="price">قیمت نوشته شود</span>
                     <a href="#" class="btn">سفارش</a>
                 </div>
             </div>
 
             <div class="card">
-                <img src="https://via.placeholder.com/300x300?text=No+Image" alt="محصول 3" class="product-img">
+                <img src="https://via.placeholder.com/400x300?text=Place+Image+Here" alt="جای عکس" class="product-img">
                 <div class="card-content">
-                    <h3>شمع شماره 3</h3>
-                    <p>توضیحات محصول...</p>
-                    
-                    <span class="price">قیمت گذاشته شود</span>
-                    
+                    <h3>نام محصول نوشته شود</h3>
+                    <p>توضیحات محصول نوشته شود...</p>
+                    <span class="price">قیمت نوشته شود</span>
                     <a href="#" class="btn">سفارش</a>
                 </div>
             </div>
@@ -185,28 +188,52 @@
         </div>
     </section>
 
-    <section id="ai">
-        <h2 class="section-title"><span>خدمات هوش مصنوعی</span></h2>
+    <section id="premium">
+        <h2 class="section-title"><span>اشتراک‌های پرمیوم</span></h2>
         <div class="container">
+            
             <div class="card">
+                <img src="https://via.placeholder.com/400x300?text=AI+Image+Here" alt="جای عکس" class="product-img">
                 <div class="card-content">
-                    <h3>ChatGPT Plus</h3>
-                    <p>اشتراک قانونی یک ماهه</p>
-                    <span class="price">قیمت گذاشته شود</span>
+                    <h3>نام اشتراک (مثلاً ChatGPT)</h3>
+                    <p>توضیحات اکانت نوشته شود...</p>
+                    <span class="price">قیمت نوشته شود</span>
                     <a href="#" class="btn">خرید</a>
                 </div>
             </div>
+
+            <div class="card">
+                <img src="https://via.placeholder.com/400x300?text=Service+Image+Here" alt="جای عکس" class="product-img">
+                <div class="card-content">
+                    <h3>نام اشتراک (مثلاً Midjourney)</h3>
+                    <p>توضیحات اکانت نوشته شود...</p>
+                    <span class="price">قیمت نوشته شود</span>
+                    <a href="#" class="btn">خرید</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://via.placeholder.com/400x300?text=Other+Image+Here" alt="جای عکس" class="product-img">
+                <div class="card-content">
+                    <h3>نام اشتراک (مثلاً Spotify)</h3>
+                    <p>توضیحات اکانت نوشته شود...</p>
+                    <span class="price">قیمت نوشته شود</span>
+                    <a href="#" class="btn">خرید</a>
+                </div>
+            </div>
+
         </div>
     </section>
 
     <section id="mastercard">
-        <h2 class="section-title"><span>مسترکارت</span></h2>
+        <h2 class="section-title"><span>خدمات ارزی</span></h2>
         <div class="container">
             <div class="card">
+                <img src="https://via.placeholder.com/400x300?text=Mastercard+Image" alt="جای عکس" class="product-img">
                 <div class="card-content">
                     <h3>صدور مسترکارت</h3>
-                    <p>تحویل آنی</p>
-                    <span class="price">قیمت گذاشته شود</span>
+                    <p>توضیحات نوشته شود...</p>
+                    <span class="price">قیمت نوشته شود</span>
                     <a href="#" class="btn">درخواست</a>
                 </div>
             </div>
@@ -214,7 +241,7 @@
     </section>
 
     <footer>
-        <p>طراحی شده توسط سعید جعفرخانی</p>
+        <p>طراحی و توسعه توسط سعید جعفرخانی</p>
     </footer>
 
 </body>
