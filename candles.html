@@ -6,7 +6,7 @@
     <title>گالری شمع‌ها | فروشگاه غزل</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;300;500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;300;400;500;700;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
 
         :root {
@@ -72,11 +72,71 @@
         }
 
         h1 {
-            font-size: 3rem; margin-bottom: 50px; font-weight: 900;
+            font-size: 3rem; margin-bottom: 30px; font-weight: 900;
             background: linear-gradient(to right, #fff, #ff9f43);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
+
+        /* --- باکس ویژه انرژی و توضیحات (جدید) --- */
+        .special-energy-notice {
+            max-width: 900px;
+            margin: 0 auto 60px auto; /* فاصله از بالا و پایین */
+            background: rgba(30, 30, 40, 0.6); /* کمی تیره‌تر و قوی‌تر از کارت‌ها */
+            border: 2px solid var(--candle-color); /* حاشیه درخشان نارنجی */
+            border-radius: 25px;
+            padding: 40px;
+            backdrop-filter: blur(25px);
+            box-shadow: 0 30px 70px rgba(0,0,0,0.6), inset 0 0 30px rgba(255, 159, 67, 0.2);
+            position: relative;
+            overflow: hidden;
+            /* افکت سه بعدی اولیه - کمی کج به سمت بیننده */
+            transform: perspective(1500px) rotateX(5deg);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        /* افکت هاور روی باکس انرژی */
+        .special-energy-notice:hover {
+             transform: perspective(1500px) rotateX(0deg) translateY(-10px); /* صاف شدن و بالا آمدن */
+             box-shadow: 0 40px 90px rgba(0,0,0,0.7), inset 0 0 60px rgba(255, 159, 67, 0.4);
+             border-color: #fff;
+        }
+        
+        /* هدر هشدار */
+        .energy-warning-header {
+            font-size: 1.6rem;
+            color: var(--off-red);
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-align: center;
+            text-shadow: 0 0 15px var(--off-red);
+            display: flex; align-items: center; justify-content: center; gap: 15px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 71, 87, 0.3);
+        }
+
+        /* متن توضیحات */
+        .energy-text {
+            text-align: right; /* متن طولانی فارسی باید راست‌چین باشد تا خوانا شود */
+            direction: rtl;
+        }
+
+        .energy-text p {
+            font-size: 1.15rem;
+            line-height: 2.2; /* فاصله خطوط زیاد برای خوانایی بهتر */
+            color: #e0e0e0;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        /* کلمات برجسته شده (Highlight) */
+        .highlight-energy {
+            color: var(--candle-color);
+            font-weight: 800;
+            text-shadow: 0 0 12px rgba(255, 159, 67, 0.5);
+            font-size: 1.2rem;
+        }
+
 
         /* --- کارت محصول (Product Card) --- */
         .container {
@@ -193,7 +253,31 @@
     </header>
 
     <div class="main-content">
-        <h1>گالری شمع‌های هنری</h1>
+        <h1>گالری شمع‌های فرکانس‌دار</h1>
+
+        <div class="special-energy-notice">
+            <div class="energy-warning-header">
+                <i class="fas fa-exclamation-triangle fa-shake"></i> هشدار مهم: قبل از تهیه‌ی این آثار، حتماً بخوانید!
+            </div>
+            <div class="energy-text">
+                <p>
+                    این شمع فقط روشن نمی‌شود؛ با <span class="highlight-energy">فرکانس‌های هماهنگ‌شده‌ی کاسه تبتی</span> ساخته شده و در فرآیند آماده‌سازی آن، از ذکرها، نیت‌ها و <span class="highlight-energy">انرژی‌های خاص</span> استفاده شده است.
+                </p>
+                <p>
+                    وقتی روشنش می‌کنی، فضا آرام‌تر می‌شود، ذهن سبک‌تر، و مسیرت از انرژی‌های سنگین جدا می‌شود و به سمت انرژی‌های مثبت هدایت می‌شود.
+                </p>
+                <p>
+                    این شمع الهام‌گرفته از <span class="highlight-energy">علوم قدیمی و متون کهن</span> است؛ دانشی که قرن‌ها درباره‌ی ارتعاش، نیت و تاثیر آن بر انسان صحبت کرده‌اند.
+                </p>
+                <p>
+                    ما فقط خودمان نبودیم؛ از منابعی مثل کتاب‌های <span class="highlight-energy">علوم غریبه</span> الهام گرفتیم و با احترام، آن را به شکلی امروزی و امن بازآفرینی کردیم.
+                </p>
+                <p style="text-align: center; font-weight: bold; font-size: 1.3rem; color: white; margin-top: 30px;">
+                    یک‌بار امتحانش کافی‌ست تا تفاوت فضا، حال‌و‌هوا و تمرکزت را حس کنی.<br>
+                    <span class="highlight-energy" style="text-shadow: none; border-bottom: 2px solid var(--candle-color);">بعضی چیزها را نمی‌شود توضیح داد؛ باید تجربه‌شان کرد.</span>
+                </p>
+            </div>
+        </div>
         
         <div class="container">
             
@@ -243,14 +327,14 @@
                         <img src="images/clover.jpg" alt="شمع شبدر">
                     </div>
                     <h3>شمع طرح شبدر پله ای</h3>
-                    <p>طراحی آرگونومیک ایستاده ، سبک نئوکلاسیک و ترند سال</p>
+                    <p> طراحی آرگونومیک ایستاده ، سبک نئوکلاسیک و ترند سال</p>
                     
                     <div class="price-container">
                         <div class="old-price-row">
-                            <span class="old-price">300,000</span>
+                            <span class="old-price">240,000</span>
                             <span class="off-badge">OFF</span>
                         </div>
-                        <span class="new-price">220,000 تومان</span>
+                        <span class="new-price">جفتی 215,000 تومان</span>
                     </div>
 
                     <a href="#" class="order-btn">سفارش دهید <i class="fas fa-shopping-cart"></i></a>
