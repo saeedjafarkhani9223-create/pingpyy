@@ -4,134 +4,285 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>گالری شمع‌ها | فروشگاه غزل</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;300;500;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+
+        :root {
+            --candle-color: #ff9f43; /* رنگ تم اصلی این صفحه (نارنجی) */
+            --neon-magenta: #ff00ff;
+            --neon-cyan: #00ffff;
+            --off-red: #ff4757;
+        }
+
+        * { box-sizing: border-box; outline: none; }
 
         body {
-            background-color: #0f0f1a;
-            color: #ecf0f1;
+            margin: 0; padding: 0;
             font-family: 'Vazirmatn', sans-serif;
-            margin: 0;
-            padding-bottom: 50px;
+            background-color: #050505;
+            color: white;
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            overflow-x: hidden;
         }
 
-        header {
-            background: #d35400;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 5px 15px rgba(211, 84, 0, 0.3);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        /* --- پس‌زمینه حرفه‌ای (Mesh Gradient) --- */
+        .premium-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -5;
+            background-color: #0a0a0a;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(25,100%,20%,0.2) 0, transparent 50%), /* کمی تم نارنجی */
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
         }
+
+        .noise-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -4;
+            opacity: 0.05;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            pointer-events: none;
+        }
+
+        /* --- هدر --- */
+        header {
+            background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(20px);
+            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: fixed; width: 100%; top: 0; z-index: 1000;
+        }
+
+        .neon-logo {
+            font-family: 'Monoton', cursive; font-size: 2.2rem; color: #fff; letter-spacing: 1px;
+            text-shadow: 0 0 5px #fff, 0 0 20px var(--neon-magenta);
+        }
+        .neon-logo span { color: #fff; text-shadow: 0 0 5px #fff, 0 0 20px var(--neon-cyan); }
 
         .back-btn {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            border: 2px solid white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            transition: 0.3s;
+            text-decoration: none; color: white; border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 20px; border-radius: 50px; transition: 0.3s; display: flex; align-items: center; gap: 10px;
+            background: rgba(255,255,255,0.05);
         }
-        .back-btn:hover { background: white; color: #d35400; }
+        .back-btn:hover { background: var(--candle-color); border-color: var(--candle-color); box-shadow: 0 0 15px var(--candle-color); }
 
-        h1 { margin: 0; font-size: 1.2rem; }
+        /* --- محتوا --- */
+        .main-content {
+            flex-grow: 1; display: flex; flex-direction: column; align-items: center;
+            text-align: center; margin-top: 100px; padding: 40px 20px;
+        }
 
+        h1 {
+            font-size: 3rem; margin-bottom: 50px; font-weight: 900;
+            background: linear-gradient(to right, #fff, #ff9f43);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* --- کارت محصول (Product Card) --- */
         .container {
-            padding: 40px 5%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; max-width: 1400px;
+            perspective: 1000px; padding-bottom: 50px;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
+            width: 300px; /* کمی پهن‌تر برای عکس */
+            height: 480px; /* بلندتر برای جا شدن قیمت */
+            position: relative; transform-style: preserve-3d; transition: 0.5s;
+        }
+
+        .card-inner {
+            width: 100%; height: 100%;
+            background: rgba(30, 30, 40, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px; padding: 20px;
+            display: flex; flex-direction: column; align-items: center;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transition: 0.5s;
             overflow: hidden;
-            text-align: center;
-            transition: 0.3s;
         }
-        .card:hover { transform: translateY(-5px); border-color: #d35400; }
 
-        .product-img {
+        /* افکت نوری نارنجی */
+        .card::after {
+            content: ''; position: absolute; bottom: -20px; left: 5%; width: 90%; height: 20px;
+            background: var(--candle-color); filter: blur(30px); opacity: 0; transition: 0.5s; z-index: -1;
+        }
+
+        .card:hover { transform: translateY(-15px) rotateX(5deg); }
+        .card:hover::after { opacity: 0.6; }
+        .card:hover .card-inner { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.08); }
+
+        /* عکس محصول */
+        .img-box {
+            width: 100%; height: 220px; border-radius: 15px; overflow: hidden; margin-bottom: 15px;
+            border: 1px solid rgba(255,255,255,0.1); position: relative;
+        }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .card:hover .img-box img { transform: scale(1.1); }
+
+        h3 { font-size: 1.3rem; margin: 10px 0; color: white; }
+        p { font-size: 0.9rem; color: #aaa; margin-bottom: 20px; }
+
+        /* --- استایل قیمت دوگانه (Dual Price) --- */
+        .price-container {
             width: 100%;
-            height: 300px;
-            object-fit: cover;
+            background: rgba(0,0,0,0.3);
+            padding: 10px;
+            border-radius: 12px;
+            margin-top: auto; /* چسبیدن به پایین */
+            margin-bottom: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        .content { padding: 20px; }
-        .price { color: #e67e22; font-weight: bold; font-size: 1.2rem; display: block; margin: 10px 0; }
-        
-        .btn {
-            display: block;
-            background: #d35400;
-            color: white;
-            padding: 10px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
+        .old-price-row {
+            display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 5px;
         }
+
+        .old-price {
+            color: #777;
+            text-decoration: line-through;
+            font-size: 0.9rem;
+        }
+
+        .off-badge {
+            background: var(--off-red);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(255, 71, 87, 0.4);
+        }
+
+        .new-price {
+            display: block;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--candle-color);
+            text-shadow: 0 0 15px rgba(255, 159, 67, 0.3);
+        }
+
+        /* دکمه سفارش */
+        .order-btn {
+            width: 100%; padding: 12px; border-radius: 50px;
+            background: transparent; border: 1px solid var(--candle-color);
+            color: var(--candle-color); font-weight: bold; text-decoration: none;
+            transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 10px;
+        }
+        
+        .card:hover .order-btn {
+            background: var(--candle-color); color: black; box-shadow: 0 0 20px var(--candle-color);
+        }
+
+        /* فوتر */
+        footer {
+            text-align: center; padding: 30px; color: rgba(255,255,255,0.2);
+            font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
     </style>
 </head>
 <body>
 
+    <div class="premium-bg"></div>
+    <div class="noise-overlay"></div>
+
     <header>
-        <h1>🕯️ بخش شمع‌های دست‌ساز</h1>
+        <div class="neon-logo">GHAZAL <span>PY</span></div>
         <a href="index.html" class="back-btn"><i class="fas fa-arrow-right"></i> بازگشت</a>
     </header>
 
-    <div class="container">
+    <div class="main-content">
+        <h1>گالری شمع‌های هنری</h1>
         
-        <div class="card">
-            <img src="images/5940799009100336312_121.jpg" class="product-img" alt="شمع ۱">
-            <div class="content">
-                <h3>شمع کلاسیک</h3>
-                <p>ساخته شده با موم طبیعی</p>
-                <span class="price">150,000 تومان</span>
-                <a href="#" class="btn">سفارش</a>
+        <div class="container">
+            
+            <div class="card">
+                <div class="card-inner">
+                    <div class="img-box">
+                        <img src="images/5940799009100336312_121.jpg" alt="شمع کلاسیک">
+                    </div>
+                    <h3>شمع کلاسیک</h3>
+                    <p>ساخته شده با موم طبیعی و معطر</p>
+                    
+                    <div class="price-container">
+                        <div class="old-price-row">
+                            <span class="old-price">200,000</span>
+                            <span class="off-badge">OFF</span>
+                        </div>
+                        <span class="new-price">150,000 تومان</span>
+                    </div>
+
+                    <a href="#" class="order-btn">سفارش دهید <i class="fas fa-shopping-cart"></i></a>
+                </div>
             </div>
-        </div>
 
-        <div class="card">
-            <img src="images/100.jpg" class="product-img" alt="شمع ۲">
-            <div class="content">
-                <h3>شمع طرح مدرن</h3>
-                <p>طراحی خاص و مینیمال</p>
-                <span class="price">210,000 تومان</span>
-                <a href="#" class="btn">سفارش</a>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="img-box">
+                        <img src="images/100.jpg" alt="شمع مدرن">
+                    </div>
+                    <h3>شمع طرح مدرن</h3>
+                    <p>طراحی خاص مینیمال و بدون دود</p>
+                    
+                    <div class="price-container">
+                        <div class="old-price-row">
+                            <span class="old-price">280,000</span>
+                            <span class="off-badge">OFF</span>
+                        </div>
+                        <span class="new-price">210,000 تومان</span>
+                    </div>
+
+                    <a href="#" class="order-btn">سفارش دهید <i class="fas fa-shopping-cart"></i></a>
+                </div>
             </div>
-        </div>
 
-       
-        <div class="card">
-            <img src="images/clover.jpg" class="product-img" alt="شمع شبدر">
-            <div class="content">
-                <h3>شمع طرح شبدر</h3>
-                <p>طراحی بسیار خاص و زیبا</p>
-                <span class="price">220,000 تومان</span>
-                <a href="#" class="btn">سفارش</a>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="img-box">
+                        <img src="images/clover.jpg" alt="شمع شبدر">
+                    </div>
+                    <h3>شمع طرح شبدر</h3>
+                    <p>طراحی بسیار خاص و ترند سال</p>
+                    
+                    <div class="price-container">
+                        <div class="old-price-row">
+                            <span class="old-price">300,000</span>
+                            <span class="off-badge">OFF</span>
+                        </div>
+                        <span class="new-price">220,000 تومان</span>
+                    </div>
+
+                    <a href="#" class="order-btn">سفارش دهید <i class="fas fa-shopping-cart"></i></a>
+                </div>
             </div>
-        </div>
 
- <div class="card">
-            <img src="images/candle3.jpg" class="product-img" alt="شمع ویژه">
-            <div class="content">
-                <h3>شمع طرح ویژه</h3>
-                <p>جدیدترین مدل اضافه شده</p>
-                <span class="price">240,000 تومان</span>
-                <a href="#" class="btn">سفارش</a>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="img-box">
+                        <img src="images/candle3.jpg" alt="شمع ویژه">
+                    </div>
+                    <h3>شمع طرح ویژه</h3>
+                    <p>جدیدترین مدل اضافه شده به کالکشن</p>
+                    
+                    <div class="price-container">
+                        <div class="old-price-row">
+                            <span class="old-price">350,000</span>
+                            <span class="off-badge">OFF</span>
+                        </div>
+                        <span class="new-price">240,000 تومان</span>
+                    </div>
+
+                    <a href="#" class="order-btn">سفارش دهید <i class="fas fa-shopping-cart"></i></a>
+                </div>
             </div>
-        </div>
-
 
         </div>
-        
     </div>
+
+    <footer>
+        DESIGNED BY SAEED JAFARKHANI | GHAZAL PY © 2025
+    </footer>
 
 </body>
 </html>
