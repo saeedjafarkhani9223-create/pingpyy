@@ -7,18 +7,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;300;500;700;900&display=swap');
-        /* فونت انگلیسی خاص برای لوگوی نئونی */
+        /* فونت انگلیسی برای لوگو */
         @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
 
         :root {
-            --bg-dark: #020205; /* خیلی تیره نزدیک به سیاه */
-            --neon-pink: #ff00ff;
-            --neon-blue: #00ffff;
-            --neon-purple: #bc13fe;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --border-light: rgba(255, 255, 255, 0.1);
+            /* رنگ‌های نئون اصلی */
+            --neon-magenta: #ff00ff;
+            --neon-cyan: #00ffff;
             
-            /* رنگ‌های کارت‌ها */
+            /* رنگ کارت‌ها */
             --candle-color: #ff9f43;
             --premium-color: #a29bfe;
             --master-color: #1dd1a1;
@@ -30,144 +27,106 @@
         body {
             margin: 0; padding: 0;
             font-family: 'Vazirmatn', sans-serif;
-            background-color: var(--bg-dark);
+            background-color: #050505;
             color: white;
             min-height: 100vh;
             display: flex; flex-direction: column;
             overflow-x: hidden;
         }
 
-        /* --- پس‌زمینه فوق حرفه‌ای (تلفیق گرید و نور) --- */
-        .bg-wrapper {
+        /* --- پس‌زمینه جدید و فوق حرفه‌ای (Mesh Gradient + Noise) --- */
+        .premium-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -5;
-            background: radial-gradient(circle at center, #111 0%, #000 100%);
-        }
-
-        /* شبکه توری (Grid) برای حس تکنولوژی */
-        .tech-grid {
-            position: absolute; width: 100%; height: 100%;
+            background-color: #0a0a0a;
+            /* گرادینت‌های محو و عمیق */
             background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
-            -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
         }
 
-        /* توپ‌های نورانی متحرک */
-        .orb {
-            position: fixed; border-radius: 50%; filter: blur(100px); z-index: -2; opacity: 0.5;
-            animation: float 15s infinite ease-in-out;
-        }
-        .orb-1 { width: 500px; height: 500px; background: var(--neon-purple); top: -20%; right: -10%; }
-        .orb-2 { width: 400px; height: 400px; background: var(--neon-blue); bottom: -10%; left: -10%; animation-delay: -5s; }
-        .orb-3 { width: 200px; height: 200px; background: var(--neon-pink); top: 40%; left: 40%; opacity: 0.3; }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(20px, 40px) scale(1.1); }
+        /* بافت نویز (Grain) برای حس لوکس بودن */
+        .noise-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -4;
+            opacity: 0.05;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            pointer-events: none;
         }
 
-        /* --- هدر حرفه‌ای --- */
+        /* --- هدر شیشه‌ای --- */
         header {
-            background: rgba(5, 5, 10, 0.6);
-            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.4); /* خیلی شفاف */
+            backdrop-filter: blur(20px); /* تاری زیاد مثل شیشه مات */
+            -webkit-backdrop-filter: blur(20px);
             padding: 15px 5%;
             display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid var(--border-light);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             position: fixed; width: 100%; top: 0; z-index: 1000;
         }
 
-        /* --- لوگوی نئونی واقعی (درخواست شما) --- */
+        /* --- لوگوی نئونی دو رنگ (همیشه روشن) --- */
         .neon-logo {
-            font-family: 'Monoton', cursive; /* فونت شبیه لامپ نئون */
-            font-size: 2.5rem;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            /* افکت نئون چند لایه */
+            font-family: 'Monoton', cursive;
+            font-size: 2.2rem;
+            color: #fff; /* هسته سفید */
+            letter-spacing: 1px;
+            /* درخشش صورتی برای GHAZAL */
             text-shadow: 
                 0 0 5px #fff,
                 0 0 10px #fff,
-                0 0 20px var(--neon-purple),
-                0 0 40px var(--neon-purple),
-                0 0 80px var(--neon-purple),
-                0 0 90px var(--neon-purple);
-            animation: neon-pulse 1.5s infinite alternate;
+                0 0 20px var(--neon-magenta),
+                0 0 40px var(--neon-magenta),
+                0 0 80px var(--neon-magenta);
         }
         
         .neon-logo span {
+            /* درخشش آبی برای PY */
             color: #fff;
             text-shadow: 
                 0 0 5px #fff,
                 0 0 10px #fff,
-                0 0 20px var(--neon-blue),
-                0 0 40px var(--neon-blue),
-                0 0 80px var(--neon-blue);
+                0 0 20px var(--neon-cyan),
+                0 0 40px var(--neon-cyan),
+                0 0 80px var(--neon-cyan);
         }
 
-        @keyframes neon-pulse {
-            from { opacity: 0.9; text-shadow: 0 0 10px #fff, 0 0 20px var(--neon-purple), 0 0 30px var(--neon-purple); }
-            to { opacity: 1; text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px var(--neon-purple), 0 0 40px var(--neon-purple), 0 0 60px var(--neon-purple); }
-        }
-
-        /* --- نوار ناوبری (Tabs) جدید --- */
-        nav ul {
-            display: flex; list-style: none; margin: 0; padding: 0; gap: 15px;
-        }
+        /* --- منوی ناوبری --- */
+        nav ul { display: flex; list-style: none; margin: 0; padding: 0; gap: 15px; }
 
         nav a {
-            text-decoration: none;
-            color: rgba(255,255,255,0.8);
-            font-weight: 500;
-            padding: 10px 20px;
-            border-radius: 50px; /* کپسولی */
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.4s;
-            display: flex; align-items: center; gap: 8px;
-            font-size: 0.9rem;
-            position: relative;
-            overflow: hidden;
+            text-decoration: none; color: rgba(255,255,255,0.7);
+            font-weight: 500; padding: 10px 20px; border-radius: 50px;
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.4s; display: flex; align-items: center; gap: 8px; font-size: 0.9rem;
         }
 
-        /* افکت هاور دکمه‌ها */
         nav a:hover {
-            background: rgba(255,255,255,0.1);
-            color: white;
-            border-color: rgba(255,255,255,0.3);
-            box-shadow: 0 0 15px rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.1); color: white;
+            border-color: rgba(255,255,255,0.3); box-shadow: 0 0 20px rgba(255,255,255,0.1);
             transform: translateY(-2px);
         }
-
-        /* رنگ خاص برای هاور هر دکمه */
-        nav li:nth-child(1) a:hover { border-color: var(--candle-color); box-shadow: 0 0 15px var(--candle-color); }
-        nav li:nth-child(2) a:hover { border-color: var(--premium-color); box-shadow: 0 0 15px var(--premium-color); }
-        nav li:nth-child(3) a:hover { border-color: var(--master-color); box-shadow: 0 0 15px var(--master-color); }
-        nav li:nth-child(4) a:hover { border-color: var(--freelance-color); box-shadow: 0 0 15px var(--freelance-color); }
 
         /* --- محتوای اصلی --- */
         .main-content {
             flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; margin-top: 100px; padding: 40px 20px;
+            text-align: center; margin-top: 120px; padding: 40px 20px;
         }
 
         h1 {
-            font-size: 3.5rem; margin-bottom: 10px; font-weight: 900;
-            background: linear-gradient(to bottom, #fff, #999);
+            font-size: 3.5rem; margin-bottom: 20px; font-weight: 900;
+            background: linear-gradient(to right, #ffffff, #a5a5a5);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px rgba(255,255,255,0.2));
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .subtitle {
-            font-size: 1.1rem; color: #aaa; margin-bottom: 60px; max-width: 600px; line-height: 1.8;
-            border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px;
+            font-size: 1.1rem; color: #aaa; margin-bottom: 70px; max-width: 600px; line-height: 1.8;
         }
 
         /* --- کارت‌های سه بعدی --- */
         .container {
-            display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; max-width: 1400px;
-            perspective: 1000px;
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; max-width: 1400px;
+            perspective: 1000px; padding-bottom: 50px;
         }
 
         .card {
@@ -177,75 +136,87 @@
 
         .card-inner {
             width: 100%; height: 100%;
-            background: rgba(20, 20, 30, 0.6); /* تیره‌تر برای کنتراست */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px; padding: 30px;
+            background: rgba(30, 30, 40, 0.4); /* تیره و شیشه‌ای */
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px; padding: 30px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
             transition: 0.5s;
         }
 
-        /* افکت نوری پشت کارت */
-        .card::before {
-            content: ''; position: absolute; top: 10%; left: 10%; right: 10%; bottom: 10%;
-            border-radius: 50%; background: var(--glow-color); z-index: -1;
-            filter: blur(40px); opacity: 0; transition: 0.5s;
+        /* نوری که زیر کارت روشن میشه */
+        .card::after {
+            content: ''; position: absolute; bottom: -20px; left: 5%; width: 90%; height: 20px;
+            background: var(--glow-color); filter: blur(30px); opacity: 0; transition: 0.5s; z-index: -1;
         }
 
-        .card:hover { transform: rotateX(10deg) translateY(-15px); }
-        .card:hover::before { opacity: 0.5; }
-        .card:hover .card-inner {
-            background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.3);
-        }
+        .card:hover { transform: translateY(-15px) rotateX(5deg); }
+        .card:hover::after { opacity: 0.6; }
+        .card:hover .card-inner { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.08); }
 
         .icon-box {
             font-size: 3.5rem; color: var(--glow-color); margin-bottom: 25px;
-            filter: drop-shadow(0 0 10px var(--glow-color)); transition: 0.3s;
+            filter: drop-shadow(0 0 15px var(--glow-color)); transition: 0.4s;
         }
-        .card:hover .icon-box { transform: scale(1.2); filter: drop-shadow(0 0 20px var(--glow-color)); }
+        .card:hover .icon-box { transform: scale(1.2) rotate(10deg); filter: drop-shadow(0 0 30px var(--glow-color)); }
 
         h2 { font-size: 1.4rem; margin: 0 0 10px 0; color: white; }
-        p { font-size: 0.85rem; color: #888; margin: 0; }
+        p { font-size: 0.85rem; color: #888; margin: 0; transition: 0.3s; }
         .card:hover p { color: white; }
+
+        /* --- اینماد (شناور سمت راست پایین) --- */
+        .enamad-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 2000;
+            background: rgba(255, 255, 255, 0.95); /* زمینه سفید برای دیده شدن لوگو */
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            width: 110px; /* سایز متناسب */
+            display: flex; justify-content: center; align-items: center;
+            transition: 0.3s;
+        }
+        .enamad-badge:hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(0,255,255,0.3); }
+        .enamad-badge img { width: 100%; height: auto; display: block; }
 
         /* فوتر */
         footer {
-            text-align: center; padding: 30px; color: rgba(255,255,255,0.3);
-            font-size: 0.8rem; border-top: 1px solid var(--border-light); margin-top: 50px;
+            text-align: center; padding: 30px; color: rgba(255,255,255,0.2);
+            font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: auto;
         }
 
-        /* منوی موبایل */
+        /* موبایل */
         @media (max-width: 768px) {
             .neon-logo { font-size: 1.8rem; }
-            nav ul { display: none; } /* فعلا مخفی در موبایل برای تمیزی */
+            nav ul { display: none; }
+            .container { gap: 30px; }
             h1 { font-size: 2.2rem; }
-            .container { gap: 20px; }
+            .enamad-badge { width: 90px; bottom: 10px; right: 10px; }
         }
         
         /* دراپ داون */
         .dropdown { position: relative; }
         .dropdown-content {
             display: none; position: absolute; top: 120%; left: 0;
-            background: rgba(0,0,0,0.9); border: 1px solid #333;
+            background: rgba(10, 10, 20, 0.95); border: 1px solid #333;
             border-radius: 10px; min-width: 180px; overflow: hidden;
         }
         .dropdown:hover .dropdown-content { display: block; }
         .dropdown-content a {
-            display: block; padding: 10px; color: #ccc; border-bottom: 1px solid #222; border-radius: 0;
+            display: block; padding: 10px; color: #ccc; border-bottom: 1px solid #222;
             background: transparent; box-shadow: none; justify-content: start;
         }
-        .dropdown-content a:hover { background: #222; color: #fff; transform: none; box-shadow: none; border-color: transparent;}
+        .dropdown-content a:hover { background: #222; color: #fff; transform: none; box-shadow: none; }
 
     </style>
 </head>
 <body>
 
-    <div class="bg-wrapper">
-        <div class="tech-grid"></div> </div>
-    <div class="orb orb-1"></div>
-    <div class="orb orb-2"></div>
-    <div class="orb orb-3"></div>
+    <div class="premium-bg"></div>
+    <div class="noise-overlay"></div>
 
     <header>
         <div class="neon-logo">GHAZAL <span>PY</span></div>
@@ -272,10 +243,10 @@
     </header>
 
     <div class="main-content">
-        <h1>فروشگاه دیجیتال غزل</h1>
+        <h1>خلاقیت در دنیای دیجیتال</h1>
         <div class="subtitle">
-            جایی که هنر دست با تکنولوژی هوش مصنوعی ترکیب می‌شود.<br>
-            برای شروع، یکی از خدمات زیر را انتخاب کنید.
+            ترکیبی از ظرافت هنر دست و قدرت تکنولوژی.<br>
+            برای شروع، مسیر خود را انتخاب کنید.
         </div>
 
         <div class="container">
@@ -284,7 +255,7 @@
                 <div class="card-inner">
                     <div class="icon-box"><i class="fas fa-fire-alt"></i></div>
                     <h2>شمع‌های هنری</h2>
-                    <p>خرید شمع‌های معطر و دکوراتیو</p>
+                    <p>گالری شمع‌های خاص و دست‌ساز</p>
                 </div>
             </a>
 
@@ -308,11 +279,17 @@
                 <div class="card-inner">
                     <div class="icon-box"><i class="fas fa-laptop-code"></i></div>
                     <h2>فریلنسری</h2>
-                    <p>سفارش پروژه برنامه‌نویسی</p>
+                    <p>برنامه‌نویسی و طراحی وب</p>
                 </div>
             </a>
 
         </div>
+    </div>
+
+    <div class="enamad-badge">
+        <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=693460&Code=f4xSh1pUFjNVYobxmZcECxYYgsJmryBF'>
+            <img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=693460&Code=f4xSh1pUFjNVYobxmZcECxYYgsJmryBF' alt='' style='cursor:pointer' code='f4xSh1pUFjNVYobxmZcECxYYgsJmryBF'>
+        </a>
     </div>
 
     <footer>
