@@ -3,115 +3,387 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فروشگاه غزل | انتخاب خدمات</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>فروشگاه غزل | دنیای خدمات دیجیتال</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;300;500;700;900&display=swap');
 
         :root {
-            --primary: #0f0f1a;
-            --glass: rgba(255, 255, 255, 0.05);
-            --border: rgba(255, 255, 255, 0.1);
-            --neon-orange: #ff7b00;
-            --neon-purple: #bc13fe;
-            --neon-green: #00ff9d;
-            --neon-blue: #00d9ff;
+            --bg-dark: #050505;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border-light: rgba(255, 255, 255, 0.1);
+            --primary-glow: #8e44ad;
+            /* رنگ‌های اختصاصی */
+            --candle-color: #ff6b6b;
+            --premium-color: #a29bfe;
+            --master-color: #1dd1a1;
+            --freelance-color: #54a0ff;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
+        * {
+            box-sizing: border-box;
+            outline: none;
+        }
 
         body {
+            margin: 0;
+            padding: 0;
             font-family: 'Vazirmatn', sans-serif;
-            background-color: var(--primary);
+            background-color: var(--bg-dark);
             color: white;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             overflow-x: hidden;
-            perspective: 1000px; /* عمق سه بعدی برای کل صفحه */
         }
 
-        /* --- پس زمینه متحرک و پیشرفته --- */
-        .bg-animation {
+        /* --- پس‌زمینه متحرک و فضایی --- */
+        .animated-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #000000 100%);
+            background: radial-gradient(circle at 50% 50%, #1a1a2e, #000);
             z-index: -2;
         }
-
-        .bg-orb {
-            position: fixed;
-            width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(142, 68, 173, 0.3) 0%, rgba(0,0,0,0) 70%);
-            border-radius: 50%;
-            top: 20%; left: 30%;
-            animation: orbFloat 10s infinite alternate ease-in-out;
-            z-index: -1;
-            filter: blur(50px);
-        }
         
-        .bg-orb-2 {
+        .orb {
             position: fixed;
-            width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(211, 84, 0, 0.2) 0%, rgba(0,0,0,0) 70%);
             border-radius: 50%;
-            bottom: 10%; right: 20%;
-            animation: orbFloat 15s infinite alternate-reverse ease-in-out;
+            filter: blur(80px);
             z-index: -1;
-            filter: blur(60px);
+            animation: float 10s infinite ease-in-out;
+            opacity: 0.6;
         }
+        .orb-1 { width: 400px; height: 400px; background: #8e44ad; top: -100px; right: -100px; animation-duration: 15s; }
+        .orb-2 { width: 300px; height: 300px; background: #2980b9; bottom: -50px; left: -50px; animation-duration: 12s; animation-delay: -5s; }
+        .orb-3 { width: 200px; height: 200px; background: #e74c3c; top: 40%; left: 40%; animation-duration: 20s; opacity: 0.3; }
 
-        @keyframes orbFloat {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, -50px); }
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 50px); }
         }
 
         /* --- هدر شیشه‌ای --- */
         header {
-            background: rgba(15, 15, 26, 0.6);
+            background: rgba(10, 10, 10, 0.7);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--border-light);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: 0.3s;
         }
 
-        .logo { 
-            font-size: 1.8rem; 
-            font-weight: 900; 
-            color: white; 
-            text-shadow: 0 0 15px rgba(255,255,255,0.3);
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: white;
             letter-spacing: 1px;
+            text-shadow: 0 0 15px rgba(255,255,255,0.3);
         }
-        .logo span { color: var(--neon-orange); text-shadow: 0 0 15px var(--neon-orange); }
+        .logo span { color: #d35400; font-weight: 300; }
 
-        nav ul { display: flex; list-style: none; align-items: center; gap: 20px; }
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 20px;
+        }
 
         nav a {
             color: rgba(255,255,255,0.7);
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 500;
             transition: 0.3s;
-            font-size: 0.95rem;
-            padding: 8px 15px;
-            border-radius: 50px;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 0; height: 2px;
+            background: #d35400;
+            transition: 0.3s;
+        }
+        nav a:hover { color: white; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        nav a:hover::after { width: 100%; }
+
+        /* --- منوی دراپ‌داون --- */
+        .dropdown { position: relative; }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: rgba(20, 20, 30, 0.95);
+            backdrop-filter: blur(10px);
+            min-width: 220px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-radius: 15px;
+            top: 150%;
+            left: 0;
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+            animation: fadeInUp 0.3s ease;
+        }
+        .dropdown:hover .dropdown-content { display: block; top: 100%; }
+        .dropdown-content a {
+            display: flex; align-items: center; gap: 10px;
+            padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: #ccc;
+        }
+        .dropdown-content a:hover { background: rgba(255,255,255,0.1); color: white; }
+
+        /* --- بدنه اصلی --- */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 100px;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            font-weight: 900;
+            background: linear-gradient(to right, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 60px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        /* --- گرید کارت‌ها (بخش اصلی سه بعدی) --- */
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1400px;
+            perspective: 1000px; /* ایجاد عمق سه بعدی */
+        }
+
+        .card {
+            width: 280px;
+            height: 380px;
+            text-decoration: none;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
+            transition: all 0.5s ease;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        nav a::before {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px;
-            background: var(--neon-orange); transition: 0.3s;
+        /* افکت‌های نوری و هاور */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 20px;
+            background: var(--glow-color);
+            z-index: -1;
+            filter: blur(25px);
+            opacity: 0;
+            transition: opacity 0.5s;
         }
-        nav a:hover::before { width: 100%; }
-        nav a:hover { color: white; text-shadow: 0 0 8px rgba(255,255,255,0.5); }
 
-        /* دراپ‌دان */
-        .dropdown { position:
+        .card:hover {
+            transform: rotateX(10deg) translateY(-15px);
+        }
+        
+        .card:hover::before {
+            opacity: 0.6;
+        }
+
+        .card:hover .card-inner {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* آیکون‌ها */
+        .icon-box {
+            width: 100px;
+            height: 100px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            font-size: 3rem;
+            color: var(--glow-color);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.5s;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2) inset;
+        }
+
+        .card:hover .icon-box {
+            transform: scale(1.1) rotate(10deg);
+            background: var(--glow-color);
+            color: #000;
+            box-shadow: 0 0 30px var(--glow-color);
+            border-color: transparent;
+        }
+
+        h2 { font-size: 1.5rem; margin: 0 0 10px 0; color: white; font-weight: 700; }
+        p { font-size: 0.9rem; color: #aaa; margin: 0; transition: 0.3s; }
+        .card:hover p { color: white; }
+
+        /* دکمه داخل کارت */
+        .btn-arrow {
+            margin-top: auto;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex; align-items: center; justify-content: center;
+            color: white;
+            transition: 0.3s;
+        }
+        .card:hover .btn-arrow {
+            background: white;
+            color: black;
+            width: 100%;
+            border-radius: 10px;
+        }
+        .btn-arrow span { display: none; font-size: 0.9rem; font-weight: bold; }
+        .card:hover .btn-arrow i { display: none; }
+        .card:hover .btn-arrow span { display: block; }
+
+        /* فوتر */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255,255,255,0.3);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        /* ریسپانسیو */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            nav ul { display: none; } /* منوی موبایل فعلا مخفی */
+            .container { gap: 20px; }
+            .card { width: 100%; max-width: 320px; height: 320px; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="animated-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <header>
+        <div class="logo">GHAZAL <span>PY</span></div>
+        <nav>
+            <ul>
+                <li><a href="candles.html">شمع‌ها</a></li>
+                <li><a href="premium.html">اکانت‌ها</a></li>
+                <li><a href="mastercard.html">ارزی</a></li>
+                <li><a href="freelance.html">پروژه</a></li>
+                
+                <li class="dropdown">
+                    <a href="#" style="color: #f1c40f;">پشتیبانی <i class="fas fa-chevron-down" style="font-size:0.7rem;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="https://t.me/GhazalCandle" target="_blank"><i class="fab fa-telegram"></i> @GhazalCandle</a>
+                        <a href="https://t.me/Pingpay7" target="_blank"><i class="fab fa-telegram-plane"></i> @Pingpay7</a>
+                        <a href="mailto:tjsbneh@gmail.com"><i class="fas fa-envelope"></i> ارسال ایمیل</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-content">
+        <h1>خلاقیت بدون مرز</h1>
+        <div class="subtitle">به فروشگاه دیجیتال و هنری غزل خوش آمدید. <br>تلفیقی از هنر دست و تکنولوژی روز دنیا.</div>
+
+        <div class="container">
+            
+            <a href="candles.html" class="card" style="--glow-color: var(--candle-color);">
+                <div class="card-inner">
+                    <div class="icon-box"><i class="fas fa-fire-alt"></i></div>
+                    <h2>شمع‌های هنری</h2>
+                    <p>گالری شمع‌های معطر و دکوراتیو</p>
+                    <div class="btn-arrow"><i class="fas fa-arrow-left"></i><span>مشاهده گالری</span></div>
+                </div>
+            </a>
+
+            <a href="premium.html" class="card" style="--glow-color: var(--premium-color);">
+                <div class="card-inner">
+                    <div class="icon-box"><i class="fas fa-crown"></i></div>
+                    <h2>اکانت پرمیوم</h2>
+                    <p>هوش مصنوعی، اسپاتیفای و...</p>
+                    <div class="btn-arrow"><i class="fas fa-arrow-left"></i><span>خرید اشتراک</span></div>
+                </div>
+            </a>
+
+            <a href="mastercard.html" class="card" style="--glow-color: var(--master-color);">
+                <div class="card-inner">
+                    <div class="icon-box"><i class="fab fa-cc-mastercard"></i></div>
+                    <h2>خدمات ارزی</h2>
+                    <p>صدور ویزا و مسترکارت مجازی</p>
+                    <div class="btn-arrow"><i class="fas fa-arrow-left"></i><span>سفارش کارت</span></div>
+                </div>
+            </a>
+
+            <a href="freelance.html" class="card" style="--glow-color: var(--freelance-color);">
+                <div class="card-inner">
+                    <div class="icon-box"><i class="fas fa-code"></i></div>
+                    <h2>فریلنسری</h2>
+                    <p>انجام پروژه‌های برنامه‌نویسی</p>
+                    <div class="btn-arrow"><i class="fas fa-arrow-left"></i><span>ثبت سفارش</span></div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <footer>
+        DESIGNED BY SAEED JAFARKHANI | GHAZAL PY © 2025
+    </footer>
+
+</body>
+</html>
