@@ -3,133 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فروشگاه غزل | شمع، اکانت و خدمات ارزی</title>
+    <title>فروشگاه غزل | انتخاب خدمات</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap');
 
+        * { box-sizing: border-box; }
+
         body {
-            background-color: #0f0f1a;
-            /* عکس شمع با لایه تیره */
-            background-image: linear-gradient(rgba(15, 15, 26, 0.85), rgba(15, 15, 26, 0.85)), url('images/5940799009100336312_121.jpg');
-            background-size: cover;
-            background-position: center center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            
-            color: #ecf0f1;
-            font-family: 'Vazirmatn', sans-serif;
             margin: 0;
-            padding-bottom: 50px;
+            padding: 0;
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #0f0f1a;
+            color: white;
+            min-height: 100vh; /* تغییر به min-height برای اسکرول در صورت نیاز */
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
         }
 
-        /* هدر */
+        /* پس زمینه */
+        .bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(15, 15, 26, 0.9), rgba(15, 15, 26, 0.95)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            filter: blur(3px);
+        }
+
+        /* --- استایل هدر --- */
         header {
-            background: rgba(15, 15, 26, 0.9);
-            padding: 15px 30px;
-            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(30, 30, 40, 0.8);
+            backdrop-filter: blur(15px);
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            position: sticky; top: 0; z-index: 100;
-        }
-        .logo { font-size: 1.5rem; font-weight: bold; color: #f1c40f; }
-
-        /* بخش اصلی */
-        .hero {
-            text-align: center; padding: 60px 20px;
-        }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; color: #fff; }
-        .hero p { color: #ccc; margin-bottom: 40px; font-size: 1.1rem; }
-
-        /* کانتینر کارت‌ها */
-        .container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 0 5%;
-            max-width: 1200px;
-            margin: 0 auto;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
 
-        /* استایل کارت‌ها */
-        .card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
+        .logo { font-size: 1.4rem; font-weight: bold; color: white; }
+        .logo span { color: #d35400; }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            flex-wrap: wrap; /* در موبایل بشکنه خط بعد */
+        }
+
+        nav ul li { margin: 0 10px; position: relative; }
+
+        nav a {
+            color: #ddd;
+            text-decoration: none;
+            font-weight: bold;
             transition: 0.3s;
+            font-size: 0.9rem;
+            padding: 5px 8px;
+            border-radius: 5px;
+        }
+
+        nav a:hover { color: white; background: rgba(255,255,255,0.1); }
+
+        /* --- منوی بازشو --- */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #1e1e28;
+            min-width: 200px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            border-radius: 10px;
+            top: 100%;
+            left: 0;
+            z-index: 2000;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .dropdown-content a {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: #ccc;
+        }
+        .dropdown-content a:hover { background: #d35400; color: white; }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        /* --- محتوای اصلی --- */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 80px; /* فاصله از هدر */
+            padding: 20px;
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 40px; }
+        h1 span { color: #d35400; }
+
+        .container {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1200px;
+        }
+
+        .category-card {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            width: 260px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: 0.4s;
+            cursor: pointer;
             text-decoration: none;
             color: white;
-            display: flex; flex-direction: column; align-items: center;
+            position: relative;
+            overflow: hidden;
         }
-        
-        .card:hover {
+
+        .category-card:hover {
             transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.1);
-            border-color: #f1c40f;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        .card i { font-size: 3rem; margin-bottom: 20px; }
-        .card h3 { font-size: 1.4rem; margin-bottom: 10px; }
-        .card p { font-size: 0.9rem; color: #aaa; margin-bottom: 20px; }
-        
-        .btn-link {
-            margin-top: auto;
-            color: #f1c40f; font-weight: bold; border-bottom: 1px solid #f1c40f; padding-bottom: 5px;
+        .category-card i { font-size: 3rem; margin-bottom: 20px; color: var(--color); transition: 0.3s;}
+        .category-card:hover i { transform: scale(1.1); }
+        .category-card h2 { font-size: 1.3rem; margin-bottom: 10px; }
+        .category-card p { color: #aaa; font-size: 0.85rem; }
+
+        /* رنگ‌های اختصاصی */
+        .card-candle { --color: #d35400; }  /* نارنجی */
+        .card-premium { --color: #8e44ad; } /* بنفش */
+        .card-master { --color: #27ae60; }  /* سبز */
+        .card-freelance { --color: #3498db; } /* آبی */
+
+        footer { padding: 20px; font-size: 0.8rem; color: #777; text-align: center; margin-top: auto;}
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            nav ul { display: none; } /* فعلا منو رو در موبایل ساده کردیم یا باید همبرگری بشه */
+            /* اگر میخوای منو تو موبایل هم باشه خط بالا رو پاک کن ولی ممکنه جا نشه */
+            nav ul { display: flex; justify-content: center; font-size: 0.8rem;}
+            nav a { padding: 5px; }
         }
-
-        /* رنگ آیکون‌ها */
-        .icon-candle { color: #e67e22; }
-        .icon-ai { color: #8e44ad; }
-        .icon-card { color: #27ae60; }
-        .icon-freelance { color: #3498db; }
-
     </style>
 </head>
 <body>
 
+    <div class="bg-image"></div>
+
     <header>
-        <div class="logo">GHAZAL PY <i class="fas fa-gem"></i></div>
+        <div class="logo">GHAZAL <span>PY</span></div>
+        <nav>
+            <ul>
+                <li><a href="candles.html">شمع‌ها</a></li>
+                <li><a href="premium.html">اشتراک</a></li>
+                <li><a href="mastercard.html">مسترکارت</a></li>
+                <li><a href="freelance.html">فریلنسری</a></li>
+                
+                <li class="dropdown">
+                    <a href="#" style="color: #f1c40f;">تماس با ما <i class="fas fa-angle-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="https://t.me/GhazalCandle" target="_blank"><i class="fab fa-telegram"></i> @GhazalCandle</a>
+                        <a href="https://t.me/Pingpay7" target="_blank"><i class="fab fa-telegram-plane"></i> @Pingpay7</a>
+                        <a href="mailto:tjsbneh@gmail.com"><i class="fas fa-envelope"></i> ایمیل ما</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
     </header>
 
-    <div class="hero">
-        <h1>فروشگاه هنری و دیجیتال غزل</h1>
-        <p>لطفاً بخش مورد نظر خود را انتخاب کنید</p>
+    <div class="main-content">
+        <h1>خدمات آنلاین و هنری <span>غزل</span></h1>
+
+        <div class="container">
+            <a href="candles.html" class="category-card card-candle">
+                <i class="fas fa-fire"></i>
+                <h2>شمع‌های دست‌ساز</h2>
+                <p>خرید انواع شمع معطر و تزئینی</p>
+            </a>
+
+            <a href="premium.html" class="category-card card-premium">
+                <i class="fas fa-crown"></i>
+                <h2>اشتراک‌های پرمیوم</h2>
+                <p>هوش مصنوعی، اسپاتیفای و...</p>
+            </a>
+
+            <a href="mastercard.html" class="category-card card-master">
+                <i class="fab fa-cc-mastercard"></i>
+                <h2>صدور مسترکارت</h2>
+                <p>پرداخت ارزی و خریدهای خارجی</p>
+            </a>
+
+            <a href="freelance.html" class="category-card card-freelance">
+                <i class="fas fa-laptop-code"></i>
+                <h2>خدمات فریلنسری</h2>
+                <p>برنامه‌نویسی، طراحی و پروژه</p>
+            </a>
+        </div>
     </div>
 
-    <div class="container">
-        
-        <a href="candles.html" class="card">
-            <i class="fas fa-fire icon-candle"></i>
-            <h3>شمع‌های دست‌ساز</h3>
-            <p>شمع‌های معطر، شبدر و کلاسیک</p>
-            <span class="btn-link">مشاهده گالری</span>
-        </a>
-
-        <a href="premium.html" class="card">
-            <i class="fas fa-robot icon-ai"></i>
-            <h3>اکانت‌های پرمیوم</h3>
-            <p>Gemini, ChatGPT, Midjourney</p>
-            <span class="btn-link">خرید اشتراک</span>
-        </a>
-
-        <a href="mastercard.html" class="card">
-            <i class="fas fa-credit-card icon-card"></i>
-            <h3>صدور کارت ارزی</h3>
-            <p>ویزا و مسترکارت مجازی</p>
-            <span class="btn-link">سفارش کارت</span>
-        </a>
-
-        <a href="freelance.html" class="card">
-            <i class="fas fa-laptop-code icon-freelance"></i>
-            <h3>نقد درآمد ارزی</h3>
-            <p>ویژه فریلنسرها و تریدرها</p>
-            <span class="btn-link">درخواست نقد کردن</span>
-        </a>
-
-    </div>
+    <footer>طراحی و توسعه با ❤️ توسط سعید جعفرخانی</footer>
 
 </body>
 </html>
