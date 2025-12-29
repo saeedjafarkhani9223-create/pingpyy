@@ -16,7 +16,6 @@
             padding-bottom: 50px;
         }
 
-        /* هدر سبز برای بخش مالی */
         header {
             background: #27ae60; 
             padding: 15px 30px;
@@ -61,10 +60,19 @@
             overflow: hidden;
         }
 
-        .card-box:hover {
+        /* فقط کارتی که فعال است هاور داشته باشد */
+        .card-box:not(.disabled):hover {
             transform: translateY(-10px);
             background: rgba(255, 255, 255, 0.1);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* استایل کارت غیرفعال */
+        .card-box.disabled {
+            opacity: 0.6; /* کمرنگ شدن */
+            filter: grayscale(100%); /* سیاه و سفید شدن */
+            cursor: not-allowed; /* موس به شکل ممنوع */
+            border-color: #555;
         }
 
         .card-img {
@@ -74,7 +82,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             background: white; 
             padding: 20px;
-            height: 160px; /* ارتفاع ثابت برای یکدست شدن */
+            height: 160px;
             object-fit: contain;
         }
 
@@ -91,6 +99,13 @@
             border-radius: 8px;
         }
 
+        /* قیمت کارت غیرفعال */
+        .card-box.disabled .price {
+            color: #999;
+            background: rgba(255,255,255,0.1);
+            text-decoration: line-through;
+        }
+
         .btn-select {
             display: block;
             margin-top: 20px;
@@ -101,7 +116,12 @@
             font-weight: bold;
             transition: 0.3s;
         }
-        .card-box:hover .btn-select { background: #2ecc71; }
+        
+        /* دکمه کارت غیرفعال */
+        .card-box.disabled .btn-select {
+            background: #555;
+            color: #aaa;
+        }
 
     </style>
 </head>
@@ -122,12 +142,12 @@
             <span class="btn-select">خرید ویزا</span>
         </a>
 
-        <a href="mastercard-buy.html" class="card-box">
+        <a onclick="alert('سرویس صدور مستر کارت موقتاً غیرفعال می‌باشد. لطفاً بعداً تلاش کنید.')" class="card-box disabled">
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/MasterCard_Logo.svg" alt="Mastercard" class="card-img">
             <h2>مسترکارت مجازی</h2>
             <p>تحویل آنی با پنل اختصاصی</p>
             <span class="price">شروع از 200,000 تومان</span>
-            <span class="btn-select">خرید مستر</span>
+            <span class="btn-select">فعلاً ناموجود</span>
         </a>
 
     </div>
