@@ -8,122 +8,128 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap');
 
-        :root {
-            --primary: #8e44ad;
-            --secondary: #2980b9;
-            --accent: #f1c40f;
-            --dark: #0f0f1a;
-            --light: #ecf0f1;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Vazirmatn', sans-serif; }
-
         body {
-            background-color: var(--dark);
-            color: var(--light);
-            overflow-x: hidden;
-            min-height: 100vh;
+            background-color: #0f0f1a;
+            /* عکس شمع با لایه تیره */
+            background-image: linear-gradient(rgba(15, 15, 26, 0.85), rgba(15, 15, 26, 0.85)), url('images/5940799009100336312_121.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            
+            color: #ecf0f1;
+            font-family: 'Vazirmatn', sans-serif;
+            margin: 0;
+            padding-bottom: 50px;
         }
 
-        /* --- پس‌زمینه متحرک --- */
-        .background-animate {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-            overflow: hidden; filter: blur(80px); opacity: 0.6; pointer-events: none;
-        }
-        .blob { position: absolute; border-radius: 50%; animation: move 20s infinite alternate ease-in-out; }
-        .blob-1 { height: 500px; width: 500px; background: var(--primary); top: -100px; right: -100px; animation-duration: 25s; }
-        .blob-2 { height: 600px; width: 600px; background: var(--secondary); bottom: -150px; left: -150px; animation-duration: 30s; animation-delay: -5s; }
-        .blob-3 { height: 400px; width: 400px; background: #5b2c6f; top: 40%; left: 30%; animation-duration: 35s; animation-delay: -10s; }
-
-        @keyframes move {
-            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-            100% { transform: translate(-50px, 100px) rotate(360deg) scale(1.1); }
-        }
-
-        /* --- هدر --- */
+        /* هدر */
         header {
-            background: rgba(15, 15, 26, 0.6); backdrop-filter: blur(10px);
-            padding: 1rem 5%; position: fixed; width: 100%; top: 0; z-index: 1000;
+            background: rgba(15, 15, 26, 0.9);
+            padding: 15px 30px;
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: sticky; top: 0; z-index: 100;
         }
-        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary); text-shadow: 0 0 10px rgba(142,68,173,0.5); }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #f1c40f; }
 
-        /* --- هیرو (بخش اصلی) --- */
+        /* بخش اصلی */
         .hero {
-            height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            text-align: center; padding: 0 20px;
+            text-align: center; padding: 60px 20px;
         }
-        .hero h1 {
-            font-size: 3.5rem; margin-bottom: 20px;
-            background: linear-gradient(to right, var(--accent), var(--primary));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .hero p { font-size: 1.3rem; margin-bottom: 40px; max-width: 700px; color: #ccc; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; color: #fff; }
+        .hero p { color: #ccc; margin-bottom: 40px; font-size: 1.1rem; }
 
-        /* --- کارت‌های دسته‌بندی (لینک‌ها) --- */
-        .category-container {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;
-            width: 80%; max-width: 1200px; margin-top: 20px;
+        /* کانتینر کارت‌ها */
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 0 5%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .cat-card {
+        /* استایل کارت‌ها */
+        .card {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px; padding: 30px; text-align: center;
-            transition: 0.4s; text-decoration: none; color: white;
+            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: 0.3s;
+            text-decoration: none;
+            color: white;
             display: flex; flex-direction: column; align-items: center;
         }
-        .cat-card:hover { transform: translateY(-10px); background: rgba(255, 255, 255, 0.1); border-color: var(--primary); }
         
-        .cat-card i { font-size: 3rem; margin-bottom: 15px; }
-        .cat-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
-        .cat-card p { font-size: 0.9rem; color: #aaa; }
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #f1c40f;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .card i { font-size: 3rem; margin-bottom: 20px; }
+        .card h3 { font-size: 1.4rem; margin-bottom: 10px; }
+        .card p { font-size: 0.9rem; color: #aaa; margin-bottom: 20px; }
+        
+        .btn-link {
+            margin-top: auto;
+            color: #f1c40f; font-weight: bold; border-bottom: 1px solid #f1c40f; padding-bottom: 5px;
+        }
 
         /* رنگ آیکون‌ها */
-        .icon-candle { color: #e67e22; text-shadow: 0 0 15px rgba(230, 126, 34, 0.5); }
-        .icon-ai { color: #8e44ad; text-shadow: 0 0 15px rgba(142, 68, 173, 0.5); }
-        .icon-card { color: #27ae60; text-shadow: 0 0 15px rgba(39, 174, 96, 0.5); }
+        .icon-candle { color: #e67e22; }
+        .icon-ai { color: #8e44ad; }
+        .icon-card { color: #27ae60; }
+        .icon-freelance { color: #3498db; }
 
     </style>
 </head>
 <body>
 
-    <div class="background-animate">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-    </div>
-
     <header>
         <div class="logo">GHAZAL PY <i class="fas fa-gem"></i></div>
     </header>
 
-    <section class="hero">
+    <div class="hero">
         <h1>فروشگاه هنری و دیجیتال غزل</h1>
-        <p>تلفیقی از هنر دست و تکنولوژی روز. لطفا بخش مورد نظر خود را انتخاب کنید:</p>
+        <p>لطفاً بخش مورد نظر خود را انتخاب کنید</p>
+    </div>
+
+    <div class="container">
         
-        <div class="category-container">
-            <a href="candles.html" class="cat-card">
-                <i class="fas fa-fire icon-candle"></i>
-                <h3>شمع‌های دست‌ساز</h3>
-                <p>شمع‌های معطر، شبدر و کلاسیک</p>
-            </a>
+        <a href="candles.html" class="card">
+            <i class="fas fa-fire icon-candle"></i>
+            <h3>شمع‌های دست‌ساز</h3>
+            <p>شمع‌های معطر، شبدر و کلاسیک</p>
+            <span class="btn-link">مشاهده گالری</span>
+        </a>
 
-            <a href="premium.html" class="cat-card">
-                <i class="fas fa-robot icon-ai"></i>
-                <h3>اکانت‌های هوش مصنوعی</h3>
-                <p>Gemini, ChatGPT, Midjourney</p>
-            </a>
+        <a href="premium.html" class="card">
+            <i class="fas fa-robot icon-ai"></i>
+            <h3>اکانت‌های پرمیوم</h3>
+            <p>Gemini, ChatGPT, Midjourney</p>
+            <span class="btn-link">خرید اشتراک</span>
+        </a>
 
-            <a href="mastercard.html" class="cat-card">
-                <i class="fas fa-credit-card icon-card"></i>
-                <h3>خدمات ارزی</h3>
-                <p>صدور ویزا و مسترکارت مجازی</p>
-            </a>
-        </div>
-    </section>
+        <a href="mastercard.html" class="card">
+            <i class="fas fa-credit-card icon-card"></i>
+            <h3>صدور کارت ارزی</h3>
+            <p>ویزا و مسترکارت مجازی</p>
+            <span class="btn-link">سفارش کارت</span>
+        </a>
+
+        <a href="freelance.html" class="card">
+            <i class="fas fa-laptop-code icon-freelance"></i>
+            <h3>نقد درآمد ارزی</h3>
+            <p>ویژه فریلنسرها و تریدرها</p>
+            <span class="btn-link">درخواست نقد کردن</span>
+        </a>
+
+    </div>
 
 </body>
 </html>
