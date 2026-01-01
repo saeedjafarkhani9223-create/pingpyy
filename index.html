@@ -3,18 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GHAZAL PY | Digital Atelier</title>
+<title>GHAZAL PY | شمع‌های دست‌ساز هنری</title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200;400;600;800&family=Monoton&display=swap" rel="stylesheet">
 
 <style>
 :root{
- --bg:#050507;
+ --bg:#060607;
  --glass:rgba(255,255,255,.06);
- --border:rgba(255,255,255,.15);
- --cyan:#00ffff;
- --mag:#ff00ff;
+ --border:rgba(255,255,255,.14);
+ --amber:#ff9f43;
  --gold:#f1c40f;
 }
 
@@ -24,10 +23,9 @@ body{
  font-family:Vazirmatn,sans-serif;
  background:radial-gradient(circle at top,#111,#000 70%);
  color:#fff;
- overflow-x:hidden;
 }
 
-/* ===== HEADER ===== */
+/* HEADER */
 header{
  position:fixed;
  top:0;width:100%;
@@ -45,9 +43,9 @@ header{
  font-family:Monoton;
  font-size:2.1rem;
  letter-spacing:2px;
- text-shadow:0 0 12px var(--mag);
+ text-shadow:0 0 12px var(--amber);
 }
-.logo span{color:var(--cyan)}
+.logo span{color:var(--gold)}
 
 nav a{
  color:#ccc;
@@ -56,16 +54,14 @@ nav a{
  font-size:.9rem;
  padding:8px 16px;
  border-radius:30px;
- border:1px solid transparent;
  transition:.3s;
 }
 nav a:hover{
  color:#fff;
- border-color:var(--cyan);
- box-shadow:0 0 12px var(--cyan);
+ box-shadow:0 0 12px var(--amber);
 }
 
-/* ===== HERO ===== */
+/* HERO */
 .hero{
  margin-top:120px;
  padding:80px 10%;
@@ -73,10 +69,10 @@ nav a:hover{
 }
 
 .hero h1{
- font-size:3.2rem;
+ font-size:3.1rem;
  font-weight:800;
  line-height:1.3;
- text-shadow:0 0 20px var(--cyan);
+ text-shadow:0 0 20px var(--amber);
 }
 
 .hero h1 span{
@@ -85,7 +81,7 @@ nav a:hover{
 }
 
 .hero p{
- max-width:600px;
+ max-width:620px;
  margin:25px auto;
  font-size:1.05rem;
  color:#aaa;
@@ -99,8 +95,8 @@ nav a:hover{
  border-radius:40px;
  font-weight:600;
  color:#000;
- background:linear-gradient(135deg,var(--cyan),var(--gold));
- box-shadow:0 0 25px rgba(0,255,255,.5);
+ background:linear-gradient(135deg,var(--amber),var(--gold));
+ box-shadow:0 0 25px rgba(255,159,67,.6);
  text-decoration:none;
  transition:.4s;
 }
@@ -109,8 +105,8 @@ nav a:hover{
  box-shadow:0 0 45px rgba(255,215,0,.8);
 }
 
-/* ===== SERVICES ===== */
-.services{
+/* PRODUCTS */
+.products{
  display:grid;
  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
  gap:40px;
@@ -134,7 +130,7 @@ nav a:hover{
  inset:-1px;
  border-radius:26px;
  opacity:0;
- background:linear-gradient(135deg,var(--cyan),var(--mag));
+ background:linear-gradient(135deg,var(--amber),var(--gold));
  z-index:-1;
  filter:blur(30px);
  transition:.4s;
@@ -146,8 +142,8 @@ nav a:hover{
 .card i{
  font-size:3.4rem;
  margin-bottom:22px;
- color:var(--cyan);
- text-shadow:0 0 20px var(--cyan);
+ color:var(--amber);
+ text-shadow:0 0 20px var(--amber);
 }
 
 .card h3{
@@ -161,7 +157,7 @@ nav a:hover{
  line-height:1.7;
 }
 
-/* ===== TRUST ===== */
+/* TRUST */
 .trust{
  padding:60px 10%;
  text-align:center;
@@ -175,6 +171,7 @@ nav a:hover{
  color:#ccc;
 }
 
+/* FOOTER */
 footer{
  padding:30px;
  text-align:center;
@@ -183,9 +180,9 @@ footer{
  border-top:1px solid var(--border);
 }
 
-/* ===== MOBILE ===== */
+/* MOBILE */
 @media(max-width:768px){
- .hero h1{font-size:2.4rem}
+ .hero h1{font-size:2.3rem}
  nav{display:none}
 }
 </style>
@@ -196,51 +193,50 @@ footer{
 <header>
  <div class="logo">GHAZAL <span>PY</span></div>
  <nav>
-  <a href="#">شمع‌ها</a>
-  <a href="#">اکانت پرمیوم</a>
-  <a href="#">فریلنسری</a>
+  <a href="#">گالری شمع‌ها</a>
+  <a href="#">درباره ما</a>
   <a href="#">پشتیبانی</a>
  </nav>
 </header>
 
 <section class="hero">
- <h1>خلاقیت <span>لوکس</span> در دنیای دیجیتال</h1>
+ <h1>شمع‌های <span>دست‌ساز</span> با امضای هنری</h1>
  <p>
- غزل‌پی جایی‌ست که هنر دست، تکنولوژی و خدمات دیجیتال
- بدون واسطه و با پشتیبانی واقعی به شما می‌رسد.
+ هر شمع در غزل‌پی با دقت، صبر و الهام ساخته می‌شود؛  
+ برای لحظه‌هایی که نور، معنا دارد.
  </p>
- <a href="#" class="cta">شروع خرید</a>
+ <a href="#" class="cta">مشاهده گالری</a>
 </section>
 
-<section class="services">
+<section class="products">
  <div class="card">
   <i class="fas fa-fire"></i>
-  <h3>شمع‌های هنری</h3>
-  <p>طراحی دست‌ساز، مناسب هدیه و دکور خاص</p>
+  <h3>شمع دکوراتیو</h3>
+  <p>طراحی خاص برای فضاهای مینیمال و هنری</p>
  </div>
 
  <div class="card">
-  <i class="fas fa-gem"></i>
-  <h3>اکانت پرمیوم</h3>
-  <p>AI، اسپاتیفای، سرویس‌های خاص با تحویل فوری</p>
+  <i class="fas fa-spa"></i>
+  <h3>شمع معطر</h3>
+  <p>رایحه‌های آرامش‌بخش، مناسب استفاده روزمره</p>
  </div>
 
  <div class="card">
-  <i class="fas fa-code"></i>
-  <h3>فریلنسری</h3>
-  <p>طراحی سایت، برنامه‌نویسی و پروژه‌های اختصاصی</p>
+  <i class="fas fa-gift"></i>
+  <h3>شمع هدیه</h3>
+  <p>بسته‌بندی شکیل برای مناسبت‌های خاص</p>
  </div>
 </section>
 
 <section class="trust">
- <span>✔ پشتیبانی تلگرام</span>
- <span>✔ تحویل سریع</span>
+ <span>✔ تولید دست‌ساز</span>
+ <span>✔ ارسال سریع</span>
  <span>✔ پرداخت امن</span>
- <span>✔ اعتماد مشتریان</span>
+ <span>✔ پشتیبانی پاسخ‌گو</span>
 </section>
 
 <footer>
- © 2025 GHAZAL PY — Digital Atelier
+ © 2025 GHAZAL PY — Handmade Candle Atelier
 </footer>
 
 </body>
