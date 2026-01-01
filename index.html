@@ -101,7 +101,7 @@
             /* انیمیشن تاب خوردن ریز و سوختن */
             animation: swing 4s infinite ease-in-out, flicker 3s infinite;
             
-            /* سایه نئونی بنفش (که ضعیف و قوی میشه) */
+            /* سایه نئونی بنفش */
             text-shadow: 
                 0 0 5px #fff,
                 0 0 10px var(--neon-magenta),
@@ -145,7 +145,6 @@
             }
         }
 
-        /* انیمیشن تاب خوردن خیلی ریز (مثل اینکه باد میخوره) */
         @keyframes swing {
             0%, 100% { transform: rotate(15deg) translateY(20px); }
             50% { transform: rotate(12deg) translateY(18px); }
@@ -203,10 +202,19 @@
         p { font-size: 0.85rem; color: #888; margin: 0; transition: 0.3s; }
         .card:hover p { color: white; }
 
+        /* --- اینماد (اصلاح شده: کوچک و سمت چپ) --- */
         .enamad-badge {
-            position: fixed; bottom: 20px; right: 20px; z-index: 2000;
-            background: rgba(255, 255, 255, 0.95); padding: 10px; border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3); width: 110px; display: flex; justify-content: center; align-items: center; transition: 0.3s;
+            position: fixed;
+            bottom: 20px;
+            left: 20px; /* تغییر به سمت چپ */
+            z-index: 2000;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px; /* پدینگ کمتر */
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            width: 80px; /* سایز کوچک‌تر */
+            display: flex; justify-content: center; align-items: center;
+            transition: 0.3s;
         }
         .enamad-badge:hover { transform: translateY(-5px); box-shadow: 0 0 30px rgba(0,255,255,0.3); }
         .enamad-badge img { width: 100%; height: auto; display: block; }
@@ -224,7 +232,7 @@
             .broken-sign-container { flex-direction: column; align-items: center; gap: 5px; }
             .dangling-word { font-size: 3.5rem; }
             .stable-text { font-size: 2.5rem; }
-            .enamad-badge { width: 90px; bottom: 10px; right: 10px; }
+            .enamad-badge { width: 70px; bottom: 10px; left: 10px; } /* در موبایل هم کوچک و چپ */
         }
         
         .dropdown { position: relative; }
@@ -253,7 +261,6 @@
             <ul>
                 <li><a href="candles.html"><i class="fas fa-fire"></i> شمع‌ها</a></li>
                 
-                
                 <li class="dropdown">
                     <a href="#" style="border-color: #f1c40f; color: #f1c40f;">
                         <i class="fas fa-headset"></i> پشتیبانی
@@ -272,7 +279,6 @@
         
         <div class="broken-sign-container">
             <span class="dangling-word">خلاقیت</span>
-            
             <span class="stable-text">در دنیای <span class="highlight-yellow">دیجیتال</span></span>
         </div>
 
@@ -289,15 +295,8 @@
                     <p>گالری شمع‌های خاص و دست‌ساز</p>
                 </div>
             </a>
-
-
-
-
-
             
-
-
-    <footer>
+            </div> </div> <footer>
         DESIGNED BY GHAZAL PY | GHAZAL PY © 2025
     </footer>
 
@@ -306,5 +305,6 @@
             <img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=693460&Code=f4xSh1pUFjNVYobxmZcECxYYgsJmryBF' alt='' style='cursor:pointer' code='f4xSh1pUFjNVYobxmZcECxYYgsJmryBF'>
         </a>
     </div>
+
 </body>
 </html>
