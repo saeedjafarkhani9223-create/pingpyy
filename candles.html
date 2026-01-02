@@ -28,7 +28,7 @@
             overflow-x: hidden;
         }
 
-        /* --- پس‌زمینه --- */
+        /* --- پس‌زمینه حرفه‌ای --- */
         .premium-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -5;
             background-color: #0a0a0a;
@@ -80,68 +80,62 @@
 
         /* --- باکس ویژه انرژی --- */
         .special-energy-notice {
-            max-width: 900px; margin: 0 auto 60px auto;
-            background: rgba(30, 30, 40, 0.6); border: 2px solid var(--candle-color); border-radius: 25px; padding: 40px;
-            backdrop-filter: blur(25px); box-shadow: 0 30px 70px rgba(0,0,0,0.6), inset 0 0 30px rgba(255, 159, 67, 0.2);
-            position: relative; overflow: hidden; transform: perspective(1500px) rotateX(5deg);
+            max-width: 900px;
+            margin: 0 auto 60px auto;
+            background: rgba(30, 30, 40, 0.6);
+            border: 2px solid var(--candle-color);
+            border-radius: 25px;
+            padding: 40px;
+            backdrop-filter: blur(25px);
+            box-shadow: 0 30px 70px rgba(0,0,0,0.6), inset 0 0 30px rgba(255, 159, 67, 0.2);
+            position: relative;
+            overflow: hidden;
+            transform: perspective(1500px) rotateX(5deg);
             transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
+
         .special-energy-notice:hover {
              transform: perspective(1500px) rotateX(0deg) translateY(-10px);
-             box-shadow: 0 40px 90px rgba(0,0,0,0.7), inset 0 0 60px rgba(255, 159, 67, 0.4); border-color: #fff;
+             box-shadow: 0 40px 90px rgba(0,0,0,0.7), inset 0 0 60px rgba(255, 159, 67, 0.4);
+             border-color: #fff;
         }
+        
         .energy-warning-header {
             font-size: 1.6rem; color: var(--off-red); font-weight: 900; margin-bottom: 30px; text-align: center;
             text-shadow: 0 0 15px var(--off-red); display: flex; align-items: center; justify-content: center; gap: 15px;
             padding-bottom: 20px; border-bottom: 1px solid rgba(255, 71, 87, 0.3);
         }
+
         .energy-text { text-align: right; direction: rtl; }
         .energy-text p { font-size: 1.15rem; line-height: 2.2; color: #e0e0e0; margin-bottom: 20px; font-weight: 400; }
         .highlight-energy { color: var(--candle-color); font-weight: 800; text-shadow: 0 0 12px rgba(255, 159, 67, 0.5); font-size: 1.2rem; }
-
-        /* --- استایل اسلایدر عکس (جدید) --- */
-        .slider-container {
-            position: relative; width: 100%; height: 100%;
-        }
-        
-        .slide-img {
-            width: 100%; height: 100%; object-fit: cover; display: none; transition: opacity 0.5s ease-in-out;
-        }
-        
-        /* کلاس active عکس فعال را نشان می‌دهد */
-        .slide-img.active { display: block; animation: fadeEffect 0.5s; }
-
-        @keyframes fadeEffect {
-            from {opacity: 0.4} 
-            to {opacity: 1}
-        }
-
-        /* دکمه‌های بعدی و قبلی */
-        .prev, .next {
-            cursor: pointer; position: absolute; top: 50%; width: auto; padding: 10px; margin-top: -22px;
-            color: white; font-weight: bold; font-size: 18px; transition: 0.6s ease; border-radius: 3px;
-            user-select: none; background-color: rgba(0,0,0,0.3); border: none; z-index: 5;
-        }
-        .next { right: 0; border-radius: 3px 0 0 3px; }
-        .prev { left: 0; border-radius: 0 3px 3px 0; }
-        .prev:hover, .next:hover { background-color: var(--candle-color); color: black; }
 
         /* --- کارت محصول --- */
         .container {
             display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; max-width: 1400px;
             perspective: 1000px; padding-bottom: 50px;
         }
-        .card { width: 300px; height: 480px; position: relative; transform-style: preserve-3d; transition: 0.5s; }
-        .card-inner {
-            width: 100%; height: 100%; background: rgba(30, 30, 40, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; padding: 20px;
-            display: flex; flex-direction: column; align-items: center; backdrop-filter: blur(15px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4); transition: 0.5s; overflow: hidden;
+
+        .card {
+            width: 300px; height: 480px; position: relative; transform-style: preserve-3d; transition: 0.5s;
         }
+
+        .card-inner {
+            width: 100%; height: 100%;
+            background: rgba(30, 30, 40, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px; padding: 20px;
+            display: flex; flex-direction: column; align-items: center;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transition: 0.5s; overflow: hidden;
+        }
+
         .card::after {
             content: ''; position: absolute; bottom: -20px; left: 5%; width: 90%; height: 20px;
             background: var(--candle-color); filter: blur(30px); opacity: 0; transition: 0.5s; z-index: -1;
         }
+
         .card:hover { transform: translateY(-15px) rotateX(5deg); }
         .card:hover::after { opacity: 0.6; }
         .card:hover .card-inner { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.08); }
@@ -150,10 +144,13 @@
             width: 100%; height: 220px; border-radius: 15px; overflow: hidden; margin-bottom: 15px;
             border: 1px solid rgba(255,255,255,0.1); position: relative;
         }
-        
+        .img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .card:hover .img-box img { transform: scale(1.1); }
+
         h3 { font-size: 1.3rem; margin: 10px 0; color: white; }
         p { font-size: 0.9rem; color: #aaa; margin-bottom: 20px; }
 
+        /* --- استایل قیمت --- */
         .price-container {
             width: 100%; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 12px;
             margin-top: auto; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.05);
@@ -174,9 +171,14 @@
             border: 1px solid var(--candle-color); color: var(--candle-color); font-weight: bold;
             text-decoration: none; transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 10px;
         }
-        .card:hover .order-btn { background: var(--candle-color); color: black; box-shadow: 0 0 20px var(--candle-color); }
+        .card:hover .order-btn {
+            background: var(--candle-color); color: black; box-shadow: 0 0 20px var(--candle-color);
+        }
 
-        footer { text-align: center; padding: 30px; color: rgba(255,255,255,0.2); font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); }
+        footer {
+            text-align: center; padding: 30px; color: rgba(255,255,255,0.2);
+            font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05);
+        }
     </style>
 </head>
 <body>
@@ -197,8 +199,20 @@
                 <i class="fas fa-exclamation-triangle fa-shake"></i> هشدار مهم: قبل از تهیه‌ی این آثار، حتماً بخوانید!
             </div>
             <div class="energy-text">
-                <p>این شمع فقط روشن نمی‌شود؛ با <span class="highlight-energy">فرکانس‌های هماهنگ‌شده‌ی کاسه تبتی</span> ساخته شده...</p>
+                <p>
+                    این شمع فقط روشن نمی‌شود؛ با <span class="highlight-energy">فرکانس‌های هماهنگ‌شده‌ی کاسه تبتی</span> ساخته شده و در فرآیند آماده‌سازی آن، از ذکرها، نیت‌ها و <span class="highlight-energy">انرژی‌های خاص</span> استفاده شده است.
+                </p>
+                <p>
+                    وقتی روشنش می‌کنی، فضا آرام‌تر می‌شود، ذهن سبک‌تر، و مسیرت از انرژی‌های سنگین جدا می‌شود و به سمت انرژی‌های مثبت هدایت می‌شود.
+                </p>
+                <p>
+                    این شمع الهام‌گرفته از <span class="highlight-energy">علوم قدیمی و متون کهن</span> است؛ دانشی که قرن‌ها درباره‌ی ارتعاش، نیت و تاثیر آن بر انسان صحبت کرده‌اند.
+                </p>
+                <p>
+                    ما فقط خودمان نبودیم؛ از منابعی مثل کتاب‌های <span class="highlight-energy">علوم غریبه</span> الهام گرفتیم و با احترام، آن را به شکلی امروزی و امن بازآفرینی کردیم.
+                </p>
                 <p style="text-align: center; font-weight: bold; font-size: 1.3rem; color: white; margin-top: 30px;">
+                    یک‌بار امتحانش کافی‌ست تا تفاوت فضا، حال‌و‌هوا و تمرکزت را حس کنی.<br>
                     <span class="highlight-energy" style="text-shadow: none; border-bottom: 2px solid var(--candle-color);">بعضی چیزها را نمی‌شود توضیح داد؛ باید تجربه‌شان کرد.</span>
                 </p>
             </div>
@@ -209,18 +223,19 @@
             <div class="card">
                 <div class="card-inner">
                     <div class="img-box">
-                        <div class="slider-container" id="slider1">
-                            <img src="images/candel1.png" class="slide-img active">
-                            <button class="prev" onclick="changeSlide(1, -1)">&#10094;</button>
-                            <button class="next" onclick="changeSlide(1, 1)">&#10095;</button>
-                        </div>
+                        <img src="images/candel1.png" alt="شمع کلاسیک Iced Latte">
                     </div>
                     <h3>شمع Iced Latte|آیس لاته</h3>
                     <p>(باطل السحر)سوخت یکنواخت و بدون دود</p>
+                    
                     <div class="price-container">
-                        <div class="old-price-row"><span class="old-price">300,000</span><span class="off-badge">OFF</span></div>
+                        <div class="old-price-row">
+                            <span class="old-price">300,000</span>
+                            <span class="off-badge">OFF</span>
+                        </div>
                         <span class="new-price">266,500 تومان</span>
                     </div>
+
                     <a href="#" class="order-btn">سفارش دهید <i class="fas fa-shopping-cart"></i></a>
                 </div>
             </div>
@@ -228,18 +243,19 @@
             <div class="card">
                 <div class="card-inner">
                     <div class="img-box">
-                        <div class="slider-container" id="slider2">
-                            <img src="images/100.jpg" class="slide-img active">
-                            <button class="prev" onclick="changeSlide(2, -1)">&#10094;</button>
-                            <button class="next" onclick="changeSlide(2, 1)">&#10095;</button>
-                        </div>
+                        <img src="images/100.jpg" alt="شمع مدرن">
                     </div>
                     <h3>شمع دکوراتیو(طرح دونات)</h3>
                     <p>رنگبندی جذاب برای دکوراسیون فانتزی(باطل السحر)</p>
+                    
                     <div class="price-container">
-                        <div class="old-price-row"><span class="old-price">180,000</span><span class="off-badge">OFF</span></div>
+                        <div class="old-price-row">
+                            <span class="old-price">180,000</span>
+                            <span class="off-badge">OFF</span>
+                        </div>
                         <span class="new-price">110,000 تومان</span>
                     </div>
+
                     <a href="#" class="order-btn">سفارش دهید <i class="fas fa-shopping-cart"></i></a>
                 </div>
             </div>
@@ -247,20 +263,19 @@
             <div class="card">
                 <div class="card-inner">
                     <div class="img-box">
-                        <div class="slider-container" id="slider3">
-                            <img src="images/clover1.jpg" class="slide-img active">
-                            <img src="images/clover2.jpg" class="slide-img">
-                            
-                            <button class="prev" onclick="changeSlide(3, -1)">&#10094;</button>
-                            <button class="next" onclick="changeSlide(3, 1)">&#10095;</button>
-                        </div>
+                        <img src="images/clover.jpg" alt="شمع شبدر">
                     </div>
                     <h3>شمع طرح شبدر پله ای</h3>
-                    <p>(باطل السحر) طراحی آرگونومیک ایستاده</p>
+                    <p> (باطل السحر)طراحی آرگونومیک ایستاده ، سبک نئوکلاسیک و ترند سال</p>
+                    
                     <div class="price-container">
-                        <div class="old-price-row"><span class="old-price">240,000</span><span class="off-badge">OFF</span></div>
+                        <div class="old-price-row">
+                            <span class="old-price">240,000</span>
+                            <span class="off-badge">OFF</span>
+                        </div>
                         <span class="new-price">جفتی 215,000 تومان</span>
                     </div>
+
                     <a href="#" class="order-btn">سفارش دهید <i class="fas fa-shopping-cart"></i></a>
                 </div>
             </div>
@@ -268,53 +283,86 @@
             <div class="card">
                 <div class="card-inner">
                     <div class="img-box">
-                        <div class="slider-container" id="slider4">
-                            <img src="images/candel4.png" class="slide-img active">
-                            <button class="prev" onclick="changeSlide(4, -1)">&#10094;</button>
-                            <button class="next" onclick="changeSlide(4, 1)">&#10095;</button>
-                        </div>
+                        <img src="images/candel4.png" alt="آیس لاته و آیس ماچا">
                     </div>
                     <h3>آیس لاته و آیس ماچا</h3>
-                    <p>(باطل السحر)ترکیب دو رایحه محبوب</p>
+                    <p>(باطل السحر)ترکیب دو رایحه محبوب و خنک</p>
+                    
                     <div class="price-container">
-                        <div class="old-price-row"><span class="old-price">300,000</span><span class="off-badge">OFF</span></div>
+                        <div class="old-price-row">
+                            <span class="old-price">300,000</span>
+                            <span class="off-badge">OFF</span>
+                        </div>
                         <span class="new-price">266,500 تومان</span>
                     </div>
+
                     <a href="#" class="order-btn">سفارش دهید <i class="fas fa-shopping-cart"></i></a>
                 </div>
             </div>
 
-        </div>
-    </div>
+            <div class="card">
+                <div class="card-inner">
+                    <div class="img-box">
+                        <img src="images/IMG_9241.jpeg" alt="محصول جدید">
+                    </div>
+                    <h3>محصول جدید ویژه</h3>
+                    <p>توضیحات این محصول به زودی اضافه می‌شود</p>
+                    
+                    <div class="price-container">
+                        <div class="old-price-row">
+                            <span class="old-price">---</span>
+                            <span class="off-badge">NEW</span>
+                        </div>
+                        <span class="new-price">قیمت به زودی</span>
+                    </div>
 
-    <footer>
+                    <a href="#" class="order-btn">سفارش دهید <i class="fas fa-shopping-cart"></i></a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-inner">
+                    <div class="img-box">
+                        <img src="images/IMG_9242.jpeg" alt="محصول جدید">
+                    </div>
+                    <h3>محصول جدید خاص</h3>
+                    <p>توضیحات این محصول به زودی اضافه می‌شود</p>
+                    
+                    <div class="price-container">
+                        <div class="old-price-row">
+                            <span class="old-price">---</span>
+                            <span class="off-badge">NEW</span>
+                        </div>
+                        <span class="new-price">قیمت به زودی</span>
+                    </div>
+
+                    <a href="#" class="order-btn">سفارش دهید <i class="fas fa-shopping-cart"></i></a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-inner">
+                    <div class="img-box">
+                        <img src="images/IMG_9263.jpeg" alt="محصول جدید">
+                    </div>
+                    <h3>محصول جدید لوکس</h3>
+                    <p>توضیحات این محصول به زودی اضافه می‌شود</p>
+                    
+                    <div class="price-container">
+                        <div class="old-price-row">
+                            <span class="old-price">---</span>
+                            <span class="off-badge">NEW</span>
+                        </div>
+                        <span class="new-price">قیمت به زودی</span>
+                    </div>
+
+                    <a href="#" class="order-btn">سفارش دهید <i class="fas fa-shopping-cart"></i></a>
+                </div>
+            </div>
+
+        </div> </div> <footer>
         DESIGNED BY SAEED JAFARKHANI | GHAZAL PY © 2025
     </footer>
-
-    <script>
-        function changeSlide(sliderIndex, n) {
-            let slider = document.getElementById("slider" + sliderIndex);
-            let slides = slider.getElementsByClassName("slide-img");
-            
-            // پیدا کردن عکس فعال فعلی
-            let currentIndex = 0;
-            for (let i = 0; i < slides.length; i++) {
-                if (slides[i].classList.contains("active")) {
-                    currentIndex = i;
-                    slides[i].classList.remove("active");
-                    break;
-                }
-            }
-            
-            // محاسبه ایندکس بعدی
-            let nextIndex = currentIndex + n;
-            if (nextIndex >= slides.length) { nextIndex = 0; }
-            if (nextIndex < 0) { nextIndex = slides.length - 1; }
-            
-            // فعال کردن عکس جدید
-            slides[nextIndex].classList.add("active");
-        }
-    </script>
 
 </body>
 </html>
