@@ -202,21 +202,19 @@
     </div>
 
 <script>
-        // پیدا کردن المان‌های فرم
-        const serviceSelect = document.getElementById('service-select');
-        const nextPageInput = document.getElementById('next-page');
+    const serviceSelect = document.getElementById('service-select');
+    const nextPageInput = document.getElementById('next-page');
 
-        // گوش دادن به تغییرات لیست کشویی
-        serviceSelect.addEventListener('change', function() {
-            if (this.value === 'vpn') {
-                // اگر کاربر VPN را انتخاب کرد، آدرس صفحه دانلود را بده
-                nextPageInput.value = "https://ghazalpy.ir/vpn-download.html";
-            } else {
-                // در غیر این صورت به صفحه موفقیت معمولی برود
-                nextPageInput.value = "https://ghazalpy.ir/success.html";
-            }
-        });
-    </script>
+    serviceSelect.addEventListener('change', function() {
+        // اینجا هم متن فارسی و هم انگلیسی را چک می‌کنیم که مطمئن شویم
+        if (this.value === 'vpn' || this.value === 'کانفیگ سرور') {
+            nextPageInput.value = "https://ghazalpy.ir/vpn-download.html";
+        } else {
+            nextPageInput.value = "https://ghazalpy.ir/success.html";
+        }
+        console.log("Next page set to: " + nextPageInput.value); // برای تست در کنسول مرورگر
+    });
+</script>
 </body>
 
     
