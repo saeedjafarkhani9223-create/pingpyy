@@ -202,17 +202,19 @@
     </div>
 
 <script>
-    const serviceSelect = document.getElementById('service-select');
+    const myForm = document.querySelector('form');
+    const serviceSelect = document.querySelector('select[name="service"]');
     const nextPageInput = document.getElementById('next-page');
 
-    serviceSelect.addEventListener('change', function() {
-        // اینجا هم متن فارسی و هم انگلیسی را چک می‌کنیم که مطمئن شویم
-        if (this.value === 'vpn' || this.value === 'کانفیگ سرور') {
+    myForm.addEventListener('submit', function(e) {
+        // چک کردن انتخاب کاربر بر اساس متن داخل گزینه
+        const selectedText = serviceSelect.options[serviceSelect.selectedIndex].text;
+        
+        if (selectedText.includes("VPN")) {
             nextPageInput.value = "https://ghazalpy.ir/vpn-download.html";
         } else {
             nextPageInput.value = "https://ghazalpy.ir/success.html";
         }
-        console.log("Next page set to: " + nextPageInput.value); // برای تست در کنسول مرورگر
     });
 </script>
 </body>
