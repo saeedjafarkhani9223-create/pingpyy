@@ -32,18 +32,18 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        h2 { color: #3498db; margin-bottom: 20px; }
+        h2 { color: #3498db; margin-bottom: 20px; font-size: 1.4rem; }
 
         .config-box {
             background: rgba(0, 0, 0, 0.4);
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 15px;
             border: 1px dashed #3498db;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .config-text {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             word-break: break-all;
             color: #2ecc71;
             display: block;
@@ -52,7 +52,9 @@
             text-align: left;
             background: rgba(255,255,255,0.05);
             padding: 10px;
-            border-radius: 5px;
+            border-radius: 8px;
+            max-height: 80px;
+            overflow-y: auto;
         }
 
         .copy-btn {
@@ -66,78 +68,98 @@
             font-weight: bold;
             width: 100%;
             transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .copy-btn:hover { background: #2980b9; }
+        .copy-btn:hover { background: #2980b9; transform: scale(1.02); }
 
         .download-section {
-            margin-top: 30px;
+            margin-top: 25px;
             border-top: 1px solid rgba(255,255,255,0.1);
             padding-top: 20px;
         }
 
-        .dl-btn-android {
+        /* اصلاح استایل دکمه‌های دانلود */
+        .dl-btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            background: #27ae60;
-            color: white;
-            padding: 15px;
+            gap: 12px;
+            padding: 14px;
             text-decoration: none;
             border-radius: 12px;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             transition: 0.3s;
+            color: white;
+            font-size: 0.95rem;
         }
 
-        .dl-btn-android:hover { background: #219150; transform: translateY(-3px); }
+        .android { background: #27ae60; }
+        .android:hover { background: #219150; transform: translateY(-2px); }
+
+        .ios { background: #000000; border: 1px solid #444; }
+        .ios:hover { background: #222; transform: translateY(-2px); }
 
         .instructions {
             text-align: right;
-            font-size: 0.85rem;
-            color: #aaa;
-            background: rgba(0,0,0,0.2);
+            font-size: 0.8rem;
+            color: #ccc;
+            background: rgba(255,255,255,0.03);
             padding: 15px;
-            border-radius: 10px;
+            border-radius: 12px;
             margin-top: 20px;
+            line-height: 1.6;
         }
+
+        .instructions strong { color: #3498db; display: block; margin-bottom: 5px; }
+        
+        .tab-title { font-size: 0.85rem; color: #aaa; margin-bottom: 10px; display: block; }
     </style>
 </head>
 <body>
 
     <div class="download-container">
-        <i class="fas fa-shield-alt" style="font-size: 3.5rem; color: #3498db; margin-bottom: 15px;"></i>
-        <h2>اطلاعات اتصال </h2>
+        <i class="fas fa-unlock-alt" style="font-size: 3rem; color: #3498db; margin-bottom: 10px;"></i>
+        <h2>آماده اتصال هستید!</h2>
         
         <div class="config-box">
-            <p style="font-size: 0.9rem; margin-bottom: 10px;">لینک اختصاصی شما (کانفیگ):</p>
+            <span class="tab-title">لینک اتصال اختصاصی شما:</span>
             <span class="config-text" id="config-link">vless://9ae25b5e-517b-4a62-8d8b-11c158b93c41@www.speedtest.net:2052?security=none&encryption=none&type=ws&host=vip.ghazalpy.ir&path=%2Fghazalpy#Ghazal-User-3</span>
             
             <button class="copy-btn" onclick="copyConfig()">
-                <i class="fas fa-copy"></i> کپی لینک اتصال
+                <i class="fas fa-copy"></i> کپی لینک کانفیگ
             </button>
         </div>
 
         <div class="download-section">
-            <p style="margin-bottom: 15px;">دانلود نرم‌افزار V2Ray برای اندروید:</p>
-            <a href="https://fa.v2rayng.org/download">
-                <i class="fab fa-android" style="font-size: 1.5rem;"></i>
-                دانلود v2rayNG (نسخه مستقیم)
+            <span class="tab-title">دانلود نرم‌افزار مورد نیاز:</span>
+            
+            <a href="https://github.com/2dust/v2rayNG/releases/download/1.9.1/v2rayNG_1.9.1_universal.apk" class="dl-btn android">
+                <i class="fab fa-android" style="font-size: 1.4rem;"></i>
+                دانلود v2rayNG برای اندروید
+            </a>
+
+            <a href="https://apps.apple.com/us/app/hiddify/id6477388562" target="_blank" class="dl-btn ios">
+                <i class="fab fa-apple" style="font-size: 1.4rem;"></i>
+                دانلود Hiddify برای آیفون
             </a>
         </div>
 
         <div class="instructions">
-            <strong>راهنمای استفاده:</strong>
-            <ol>
-                <li>ابتدا برنامه را دانلود و نصب کنید.</li>
-                <li>دکمه «کپی لینک اتصال» را در این صفحه بزنید.</li>
-                <li>وارد برنامه شده و از منوی بالا علامت + را بزنید.</li>
-                <li>گزینه Import from clipboard را انتخاب کنید.</li>
-            </ol>
+            <strong><i class="fas fa-info-circle"></i> راهنمای اندروید (v2rayNG):</strong>
+            ۱. لینک را کپی کنید. ۲. در برنامه علامت + را بزنید. ۳. گزینه Import from clipboard را انتخاب کنید و روی اکانت ایجاد شده بزنید تا متصل شود.
+            <br><br>
+            <strong><i class="fas fa-info-circle"></i> راهنمای آیفون (Hiddify):</strong>
+            ۱. ابتدا اپلیکیشن <b>Hiddify</b> را از اپ‌استور نصب کنید. ۲. لینک بالا را کپی کنید. ۳. در برنامه دکمه <b>New Profile</b> یا علامت + را بزنید. ۴. گزینه <b>Add from Clipboard</b> را انتخاب کنید تا اکانت اضافه شود.
         </div>
 
-        <a href="index.html" style="color: #7f8c8d; text-decoration: none; font-size: 0.8rem; display: block; margin-top: 20px;">بازگشت به سایت</a>
+        <a href="index.html" style="color: #7f8c8d; text-decoration: none; font-size: 0.8rem; display: block; margin-top: 25px;">
+            <i class="fas fa-home"></i> بازگشت به صفحه اصلی
+        </a>
     </div>
 
     <script>
@@ -153,8 +175,6 @@
                     btn.innerHTML = originalText;
                     btn.style.background = '#3498db';
                 }, 2500);
-            }).catch(err => {
-                alert('خطا در کپی! لطفاً متن را دستی انتخاب و کپی کنید.');
             });
         }
     </script>
