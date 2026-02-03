@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دریافت اتصال و دانلود نرم‌افزار</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700&display=swap');
+
+        body {
+            background-color: #0f0f1a;
+            color: #ecf0f1;
+            font-family: 'Vazirmatn', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .download-container {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        h2 { color: #3498db; margin-bottom: 20px; }
+
+        .config-box {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px dashed #3498db;
+            margin-bottom: 20px;
+        }
+
+        .config-text {
+            font-size: 0.85rem;
+            word-break: break-all;
+            color: #2ecc71;
+            display: block;
+            margin-bottom: 15px;
+            direction: ltr;
+            text-align: left;
+            background: rgba(255,255,255,0.05);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .copy-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Vazirmatn';
+            font-weight: bold;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .copy-btn:hover { background: #2980b9; }
+
+        .download-section {
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+        }
+
+        .dl-btn-android {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background: #27ae60;
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+
+        .dl-btn-android:hover { background: #219150; transform: translateY(-3px); }
+
+        .instructions {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #aaa;
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="download-container">
+        <i class="fas fa-shield-alt" style="font-size: 3.5rem; color: #3498db; margin-bottom: 15px;"></i>
+        <h2>اطلاعات اتصال VPN</h2>
+        
+        <div class="config-box">
+            <p style="font-size: 0.9rem; margin-bottom: 10px;">لینک اختصاصی شما (کانفیگ):</p>
+            <span class="config-text" id="config-link">vless://paste-your-actual-config-here</span>
+            
+            <button class="copy-btn" onclick="copyConfig()">
+                <i class="fas fa-copy"></i> کپی لینک اتصال
+            </button>
+        </div>
+
+        <div class="download-section">
+            <p style="margin-bottom: 15px;">دانلود نرم‌افزار V2Ray برای اندروید:</p>
+            <a href="https://github.com/2dust/v2rayNG/releases/download/1.9.1/v2rayNG_1.9.1.apk" class="dl-btn-android">
+                <i class="fab fa-android" style="font-size: 1.5rem;"></i>
+                دانلود v2rayNG (نسخه مستقیم)
+            </a>
+        </div>
+
+        <div class="instructions">
+            <strong>راهنمای استفاده:</strong>
+            <ol>
+                <li>ابتدا برنامه را دانلود و نصب کنید.</li>
+                <li>دکمه «کپی لینک اتصال» را در این صفحه بزنید.</li>
+                <li>وارد برنامه شده و از منوی بالا علامت + را بزنید.</li>
+                <li>گزینه Import from clipboard را انتخاب کنید.</li>
+            </ol>
+        </div>
+
+        <a href="index.html" style="color: #7f8c8d; text-decoration: none; font-size: 0.8rem; display: block; margin-top: 20px;">بازگشت به سایت</a>
+    </div>
+
+    <script>
+        function copyConfig() {
+            const configText = document.getElementById('config-link').innerText;
+            const btn = document.querySelector('.copy-btn');
+            
+            navigator.clipboard.writeText(configText).then(() => {
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> کپی شد!';
+                btn.style.background = '#27ae60';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = '#3498db';
+                }, 2500);
+            }).catch(err => {
+                alert('خطا در کپی! لطفاً متن را دستی انتخاب و کپی کنید.');
+            });
+        }
+    </script>
+</body>
+</html>
