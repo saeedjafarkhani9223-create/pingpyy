@@ -202,16 +202,15 @@
     </div>
 
 <script>
-    const myForm = document.querySelector('form');
-    const serviceSelect = document.querySelector('select[name="service"]');
-    const nextPageInput = document.getElementById('next-page');
-
-    myForm.addEventListener('submit', function(e) {
-        // چک کردن انتخاب کاربر بر اساس متن داخل گزینه
-        const selectedText = serviceSelect.options[serviceSelect.selectedIndex].text;
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const serviceSelect = document.querySelector('select[name="service"]');
+        const nextPageInput = document.getElementById('next-page');
         
-        if (selectedText.includes("VPN")) {
-            nextPageInput.value = "https://ghazalpy.ir/vpn-download.html";
+        // اینجا لینک متغیر پرداخت را بگذار
+        const payLink = "https://pay.ghazalpy.ir/link/763719"; 
+
+        if (serviceSelect.value === "vpn" || serviceSelect.options[serviceSelect.selectedIndex].text.includes("VPN")) {
+            nextPageInput.value = payLink;
         } else {
             nextPageInput.value = "https://ghazalpy.ir/success.html";
         }
