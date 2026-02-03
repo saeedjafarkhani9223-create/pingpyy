@@ -18,7 +18,6 @@
             padding-bottom: 50px;
         }
 
-        /* هدر */
         header {
             background: #2980b9; 
             padding: 15px 30px;
@@ -73,13 +72,8 @@
         }
 
         .input-group { margin-bottom: 20px; text-align: right; }
-        
         label { display: block; margin-bottom: 8px; color: #ccc; font-size: 0.9rem; }
-        
-        /* استایل لیبل ضروری (قرمز) */
         .required-label { color: #e74c3c; font-size: 0.8rem; margin-right: 5px; }
-        
-        /* استایل لیبل اختیاری (طوسی) */
         .optional-label { color: #7f8c8d; font-size: 0.8rem; margin-right: 5px; }
 
         input, select, textarea {
@@ -94,9 +88,6 @@
             transition: 0.3s;
         }
 
-        /* خطای فیلد اجباری */
-        input:invalid { border-color: #e74c3c; }
-        
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: #3498db;
@@ -125,6 +116,7 @@
             box-shadow: 0 8px 20px rgba(52, 152, 219, 0.6);
         }
 
+        .enamad-badge { text-align: center; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -140,13 +132,13 @@
                 <h2>فرم درخواست پروژه</h2>
                 <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 30px;">
                      لطفاً اطلاعات خود را وارد کنید. شماره تماس برای هماهنگی الزامی است.
-توحه فرمایید در قسمت نوع درخاست ،،طبق درخاستی که دارید ان را انتخاب نمایید   
+                     توجه فرمایید در قسمت نوع درخواست، طبق درخواستی که دارید آن را انتخاب نمایید.
                 </p>
             </div>
 
-            <form action="https://formsubmit.co/tjsbneh@gmail.com" method="POST">
+            <form action="https://formsubmit.co/tjsbneh@gmail.com" method="POST" id="main-form">
                 
-                <input type="hidden" name="_next" value="https://ghazalpy.ir/success.html">
+                <input type="hidden" name="_next" id="next-page" value="https://ghazalpy.ir/success.html">
                 <input type="hidden" name="_subject" value="سفارش جدید فریلنسری!">
                 <input type="hidden" name="_captcha" value="false">
 
@@ -157,9 +149,7 @@
 
                 <div class="input-group">
                     <label>شماره تماس <span class="required-label">(الزامی)</span></label>
-                    <input type="tel" name="phone" placeholder="0912..." required 
-                           oninvalid="this.setCustomValidity('لطفاً شماره تماس را وارد کنید')"
-                           oninput="this.setCustomValidity('')">
+                    <input type="tel" name="phone" placeholder="0912..." required>
                 </div>
 
                 <div class="input-group">
@@ -173,20 +163,19 @@
                 </div>
 
                 <div class="input-group">
-                    <label>لطفا نوع درخاست خود را انتخاب کنید </label>
-                    <select name="service" required>
-                        <option value+
-                         <option value ""disable selected> نوع درخاست خود را انتخاب فرمایید </option>
+                    <label>لطفا نوع درخواست خود را انتخاب کنید</label>
+                    <select name="service" id="service-select" required>
+                        <option value="" disabled selected>نوع درخواست خود را انتخاب فرمایید</option>
                         <option value="طراحی سایت">طراحی و ساخت سایت</option>
-                         <option value="کانفیگ سرور">درخاست  VPN</option>
-                        <option value="امتحانات"> واحد دانشجویی(امتحانات)</option>
-                        <option value="پروزه">پروژه و مقاله </option>
-                        <option value="پایان نامه "> پایان نامه</option>
+                        <option value="vpn">درخواست VPN</option>
+                        <option value="امتحانات">واحد دانشجویی (امتحانات)</option>
+                        <option value="پروژه">پروژه و مقاله</option>
+                        <option value="پایان نامه">پایان نامه</option>
                     </select>
                 </div>
 
                 <div class="input-group">
-                    <label> (الزامی)توضیحات پروژه</label>
+                    <label>(الزامی) توضیحات پروژه</label>
                     <textarea name="message" placeholder="توضیحات خود را بنویسید..." required></textarea>
                 </div>
 
@@ -194,30 +183,29 @@
             </form>
               
             <div class="enamad-badge">
-        <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=693460&Code=f4xSh1pUFjNVYobxmZcECxYYgsJmryBF'>
-            <img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=693460&Code=f4xSh1pUFjNVYobxmZcECxYYgsJmryBF' alt='' style='cursor:pointer' code='f4xSh1pUFjNVYobxmZcECxYYgsJmryBF'>
-        </a>
-    </div>
+                <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=693460&Code=f4xSh1pUFjNVYobxmZcECxYYgsJmryBF'>
+                    <img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=693460&Code=f4xSh1pUFjNVYobxmZcECxYYgsJmryBF' alt='' style='cursor:pointer'>
+                </a>
+            </div>
         </div>
     </div>
 
-<script>
-    document.querySelector('form').addEventListener('submit', function(e) {
-        const serviceSelect = document.querySelector('select[name="service"]');
-        const nextPageInput = document.getElementById('next-page');
-        
-        // اینجا لینک متغیر پرداخت را بگذار
-        const payLink = "https://pay.ghazalpy.ir/link/763719"; 
+    <script>
+        document.getElementById('main-form').addEventListener('submit', function(e) {
+            const serviceSelect = document.getElementById('service-select');
+            const nextPageInput = document.getElementById('next-page');
+            
+            // --- لینک متغیر درگاه پرداخت شما ---
+            const payLink = "https://pay.ghazalpy.ir/link/763719"; 
+            // ----------------------------------
 
-        if (serviceSelect.value === "vpn" || serviceSelect.options[serviceSelect.selectedIndex].text.includes("VPN")) {
-            nextPageInput.value = payLink;
-        } else {
-            nextPageInput.value = "https://ghazalpy.ir/success.html";
-        }
-    });
-</script>
-</body>
-
-    
+            // اگر کاربر گزینه VPN را انتخاب کرده باشد
+            if (serviceSelect.value === "vpn") {
+                nextPageInput.value = payLink;
+            } else {
+                nextPageInput.value = "https://ghazalpy.ir/success.html";
+            }
+        });
+    </script>
 </body>
 </html>
