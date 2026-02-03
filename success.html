@@ -54,5 +54,25 @@
         <p>به زودی همکاران ما جهت هماهنگی پروژه با شما تماس خواهند گرفت.</p>
         <a href="index.html" class="btn">بازگشت به صفحه اصلی</a>
     </div>
+
+
+<script>
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const serviceSelect = document.querySelector('select[name="service"]');
+        const nextPageInput = document.getElementById('next-page');
+        
+        // اینجا لینک متغیر پرداخت را بگذار
+        const payLink = "https://pay.ghazalpy.ir/link/763719"; 
+
+        if (serviceSelect.value === "vpn" || serviceSelect.options[serviceSelect.selectedIndex].text.includes("VPN")) {
+            nextPageInput.value = payLink;
+        } else {
+            nextPageInput.value = "https://ghazalpy.ir/success.html";
+        }
+    });
+</script>
+
+
+    
 </body>
 </html>
