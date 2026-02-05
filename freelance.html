@@ -167,18 +167,18 @@
                         <option value="پروژه">پروژه و مقاله</option>
                     </select>
                 </div>
-                    <div id="colleague-section" style="display: none; border: 1px dashed #3498db; padding: 15px; border-radius: 10px; margin-bottom: 20px; background: rgba(52, 152, 219, 0.05);">
+
+                <div id="colleague-section" style="display: none; border: 1px dashed #3498db; padding: 15px; border-radius: 10px; margin-bottom: 20px; background: rgba(52, 152, 219, 0.05);">
                     <div class="input-group">
                         <label>شماره ایتا <span class="required-label">(الزامی برای همکاران)</span></label>
                         <input type="tel" name="eitaa_number" id="eitaa-input" placeholder="09...">
                     </div>
-                <div id="colleague-section" style="display: none; border: 1px dashed #3498db; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
                     <div class="input-group">
                         <label>آپلود کارت ملی <span class="required-label">(الزامی)</span></label>
                         <input type="file" name="national_card" id="file1" accept="image/*">
                     </div>
                     <div class="input-group">
-                        <label>آپلود رزومه/مدرک تحصیلی <span class="required-label">(الزامی)</span></label>
+                        <label>آپلود شناسنامه/مدرک شناسایی <span class="required-label">(الزامی)</span></label>
                         <input type="file" name="id_card" id="file2" accept="image/*">
                     </div>
                 </div>
@@ -202,17 +202,19 @@
     <script>
         const serviceSelect = document.getElementById('service-select');
         const colleagueSection = document.getElementById('colleague-section');
+        const eitaaInput = document.getElementById('eitaa-input');
         const file1 = document.getElementById('file1');
         const file2 = document.getElementById('file2');
 
-        // مدیریت نمایش فیلد آپلود
         serviceSelect.addEventListener('change', function() {
             if (this.value === "همکاران") {
                 colleagueSection.style.display = 'block';
+                eitaaInput.required = true;
                 file1.required = true;
                 file2.required = true;
             } else {
                 colleagueSection.style.display = 'none';
+                eitaaInput.required = false;
                 file1.required = false;
                 file2.required = false;
             }
