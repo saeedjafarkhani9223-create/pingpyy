@@ -132,11 +132,10 @@
                 <h2>فرم درخواست پروژه</h2>
                 <p style="color: #aaa; font-size: 0.9rem; margin-bottom: 30px;">
                      لطفاً اطلاعات خود را وارد کنید. شماره تماس برای هماهنگی الزامی است.
-                     توجه فرمایید در قسمت نوع درخواست، طبق درخواستی که دارید آن را انتخاب نمایید.
                 </p>
             </div>
 
-            <form action="https://formsubmit.co/tjsbneh@gmail.com" method="POST" id="main-form">
+            <form action="https://formsubmit.co/tjsbneh@gmail.com" method="POST" id="main-form" enctype="multipart/form-data">
                 
                 <input type="hidden" name="_next" id="next-page" value="https://ghazalpy.ir/success.html">
                 <input type="hidden" name="_subject" value="سفارش جدید فریلنسری!">
@@ -158,24 +157,30 @@
                 </div>
 
                 <div class="input-group">
-                    <label>ایمیل <span class="optional-label">(اختیاری)</span></label>
-                    <input type="email" name="email" placeholder="example@gmail.com">
-                </div>
-
-                <div class="input-group">
                     <label>لطفا نوع درخواست خود را انتخاب کنید</label>
                     <select name="service" id="service-select" required>
                         <option value="" disabled selected>نوع درخواست خود را انتخاب فرمایید</option>
                         <option value="طراحی سایت">طراحی و ساخت سایت</option>
                         <option value="vpn">درخواست VPN</option>
                         <option value="امتحانات">واحد دانشجویی (امتحانات)</option>
+                        <option value="همکاران">واحد همکاران (ثبت‌نام)</option>
                         <option value="پروژه">پروژه و مقاله</option>
-                        <option value="پایان نامه">پایان نامه</option>
                     </select>
                 </div>
 
+                <div id="colleague-section" style="display: none; border: 1px dashed #3498db; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                    <div class="input-group">
+                        <label>آپلود کارت ملی <span class="required-label">(الزامی)</span></label>
+                        <input type="file" name="national_card" id="file1" accept="image/*">
+                    </div>
+                    <div class="input-group">
+                        <label>آپلود شناسنامه/مدرک شناسایی <span class="required-label">(الزامی)</span></label>
+                        <input type="file" name="id_card" id="file2" accept="image/*">
+                    </div>
+                </div>
+
                 <div class="input-group">
-                    <label>(الزامی) توضیحات پروژه</label>
+                    <label>توضیحات پروژه <span class="required-label">(الزامی)</span></label>
                     <textarea name="message" placeholder="توضیحات خود را بنویسید..." required></textarea>
                 </div>
 
@@ -191,15 +196,28 @@
     </div>
 
     <script>
-        document.getElementById('main-form').addEventListener('submit', function(e) {
-            const serviceSelect = document.getElementById('service-select');
-            const nextPageInput = document.getElementById('next-page');
-            
-            // --- لینک متغیر درگاه پرداخت شما ---
-            const payLink = "https://pay.ghazalpy.ir/link/763719"; 
-            // ----------------------------------
+        const serviceSelect = document.getElementById('service-select');
+        const colleagueSection = document.getElementById('colleague-section');
+        const file1 = document.getElementById('file1');
+        const file2 = document.getElementById('file2');
 
-            // اگر کاربر گزینه VPN را انتخاب کرده باشد
+        // مدیریت نمایش فیلد آپلود
+        serviceSelect.addEventListener('change', function() {
+            if (this.value === "همکاران") {
+                colleagueSection.style.display = 'block';
+                file1.required = true;
+                file2.required = true;
+            } else {
+                colleagueSection.style.display = 'none';
+                file1.required = false;
+                file2.required = false;
+            }
+        });
+
+        document.getElementById('main-form').addEventListener('submit', function(e) {
+            const nextPageInput = document.getElementById('next-page');
+            const payLink = "https://pay.ghazalpy.ir/link/763719"; 
+
             if (serviceSelect.value === "vpn") {
                 nextPageInput.value = payLink;
             } else {
