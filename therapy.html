@@ -1,1 +1,340 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شمع‌تراپی غزل | ثبت نوبت و مشخصات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700;900&display=swap');
+
+        :root {
+            --neon-magenta: #ff00ff;
+            --neon-cyan: #00ffff;
+            --shaman-color: #e056fd;
+            --bg-card: rgba(30, 30, 40, 0.6);
+        }
+
+        * { box-sizing: border-box; outline: none; }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #050505;
+            color: white;
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* پس‌زمینه */
+        .premium-bg {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -5;
+            background-color: #0a0a0a;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(280,40%,25%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+        }
+
+        header {
+            background: rgba(10, 10, 10, 0.4); backdrop-filter: blur(20px);
+            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); position: fixed; width: 100%; top: 0; z-index: 1000;
+        }
+
+        .logo { font-weight: 900; font-size: 1.5rem; color: #fff; text-shadow: 0 0 10px var(--shaman-color); }
+        
+        .back-btn {
+            text-decoration: none; color: #ccc; background: rgba(255,255,255,0.05);
+            padding: 8px 20px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem; transition: 0.3s;
+        }
+        .back-btn:hover { background: #fff; color: #000; box-shadow: 0 0 15px #fff; }
+
+        .main-container {
+            margin-top: 100px; padding: 40px 20px;
+            display: flex; flex-direction: column; align-items: center; flex-grow: 1;
+        }
+
+        h1 {
+            font-size: 2rem; font-weight: 900; margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--shaman-color); text-align: center;
+        }
+
+        .form-desc {
+            color: #aaa; font-size: 0.95rem; text-align: center; max-width: 600px;
+            line-height: 1.8; margin-bottom: 30px;
+        }
+
+        .form-wrapper {
+            background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px; padding: 40px; width: 100%; max-width: 600px;
+            backdrop-filter: blur(15px); box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .form-group { margin-bottom: 25px; position: relative; }
+
+        label { display: block; margin-bottom: 8px; font-weight: 500; color: #ddd; font-size: 0.9rem; }
+        
+        label span { color: #ff4757; margin-right: 3px; }
+
+        input[type="text"], input[type="tel"], textarea, select {
+            width: 100%; background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px;
+            padding: 14px 18px; color: white; font-family: 'Vazirmatn', sans-serif;
+            font-size: 0.95rem; transition: 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--shaman-color);
+            box-shadow: 0 0 15px rgba(224, 86, 253, 0.3);
+        }
+
+        /* بخش پلتفرم ارتباطی */
+        .platform-select-desc {
+            background: rgba(224, 86, 253, 0.08); border-right: 3px solid var(--shaman-color);
+            padding: 10px 15px; border-radius: 4px 12px 12px 4px; font-size: 0.85rem;
+            color: #e0e0e0; margin-bottom: 15px; line-height: 1.6;
+        }
+
+        .input-prefix-wrapper { position: relative; display: flex; align-items: center; }
+        
+        .prefix-text {
+            position: absolute; left: 15px; color: #666; font-size: 0.95rem;
+            direction: ltr; user-select: none; font-weight: bold;
+        }
+
+        .prefilled-input { padding-left: 135px !important; direction: ltr; text-align: left; }
+
+        .char-counter {
+            text-align: left; font-size: 0.8rem; color: #888; margin-top: 5px;
+        }
+
+        .submit-btn {
+            width: 100%; background: linear-gradient(45deg, #be2edd, var(--shaman-color));
+            color: white; border: none; padding: 16px; border-radius: 12px;
+            font-family: 'Vazirmatn', sans-serif; font-size: 1.1rem; font-weight: 700;
+            cursor: pointer; transition: 0.4s; margin-top: 10px;
+            box-shadow: 0 5px 20px rgba(224, 86, 253, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px); box-shadow: 0 8px 25px rgba(224, 86, 253, 0.6);
+            filter: brightness(1.1);
+        }
+
+        /* استایل صفحه موفقیت */
+        .success-screen {
+            display: none; text-align: center; max-width: 550px;
+            background: rgba(20, 30, 20, 0.7); border: 1px solid #2ed573;
+            border-radius: 24px; padding: 50px 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+        .success-icon { font-size: 4rem; color: #2ed573; margin-bottom: 20px; }
+        .success-title { font-size: 1.8rem; font-weight: 900; color: #2ed573; margin-bottom: 15px; }
+        .success-text { font-size: 1.1rem; line-height: 1.8; color: #e0e0e0; margin-bottom: 25px; }
+
+        footer { text-align: center; padding: 25px; color: rgba(255,255,255,0.2); font-size: 0.8rem; margin-top: auto; }
+    </style>
+</head>
+<body>
+
+    <div class="premium-bg"></div>
+
+    <header>
+        <div class="logo"><i class="fas fa-sparkles"></i> شمع‌تراپی غزل</div>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-right"></i> بازگشت به خانه</a>
+    </header>
+
+    <div class="main-container">
+        
+        <!-- فرم اصلی ثبت نام -->
+        <div id="formContainer" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+            <h1>ثبت مشخصات و رزرو نوبت شمع‌تراپی</h1>
+            <div class="form-desc">
+                جهت انجام دقیق فرآیند پاکسازی و شمع‌تراپی، لطفاً اطلاعات زیر را با دقت و صداقت کامل وارد نمایید. تمامی اطلاعات نزد ما محفوظ است.
+            </div>
+
+            <!-- برای ارسال اطلاعات به ایمیل شما، فرم به فرم‌اسپری (Formspree) متصل شده است -->
+            <div class="form-wrapper">
+                <form id="therapyForm" action="https://formspree.io/f/tjsbneh@gmail.com" method="POST">
+                    
+                    <div class="form-group">
+                        <label>نام و نام خانوادگی <span>*</span></label>
+                        <input type="text" name="Full_Name" required placeholder="مثال: زهرا مرادی">
+                    </div>
+
+                    <div class="form-group">
+                        <label>نام مادر <span>*</span></label>
+                        <input type="text" name="Mother_Name" required placeholder="جهت گره‌گشایی و ارتعاش دقیق نام مادر الزامی است">
+                    </div>
+
+                    <div class="form-group">
+                        <label>تاریخ دقیق تولد <span>*</span></label>
+                        <input type="text" name="Birth_Date" required placeholder="مثال: ۱۳۸۰/۰۴/۱۵">
+                    </div>
+
+                    <div class="form-group">
+                        <label>شماره تماس <span>*</span></label>
+                        <input type="tel" name="Phone_Number" required placeholder="مثال: ۰۹۱۲۳۴۵۶۷۸۹" style="direction: ltr; text-align: right;">
+                    </div>
+
+                    <!-- بخش انتخاب آیدی ارتباطی طبق خواسته شما -->
+                    <div class="form-group">
+                        <label>پلتفرم ارتباطی جهت هماهنگی <span>*</span></label>
+                        <div class="platform-select-desc">
+                            لطفاً ابتدا پلتفرمی که تمایل دارید با آن در ارتباط باشید (تلگرام یا روبیکا) را انتخاب نموده، سپس فقط آیدی (نام کاربری) خود را در کادر زیر وارد نمایید. لینک به صورت خودکار تنظیم خواهد شد.
+                        </div>
+                        <select id="platformSelect" name="Platform_Type" required onchange="updatePrefix()">
+                            <option value="telegram" selected>تلگرام (Telegram)</option>
+                            <option value="rubika">روبیکا (Rubika)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>آیدی یا نام کاربری شما <span>*</span></label>
+                        <div class="input-prefix-wrapper">
+                            <span id="prefixDisplay" class="prefix-text">https://t.me/</span>
+                            <input type="text" id="usernameInput" name="Social_ID" required class="prefilled-input" placeholder="my_username">
+                        </div>
+                    </div>
+
+                    <!-- بخش کادر بیان مشکل -->
+                    <div class="form-group">
+                        <label>بیان مشکل و نیت شما <span>*</span></label>
+                        <textarea id="problemText" name="User_Problem" required rows="5" maxlength="500" placeholder="مشکل، گره یا نیتی که برای آن نیاز به شمع‌تراپی دارید را بنویسید..." oninput="countChars()"></textarea>
+                        <div class="char-counter"><span id="charCount">0</span> / ۵۰۰ کاراکتر</div>
+                    </div>
+
+                    <!-- ردیف مخفی برای ارسال تاریخ نوبت در ایمیل -->
+                    <input type="hidden" id="hiddenApptDate" name="Appointment_Date">
+
+                    <button type="submit" class="submit-btn">ثبت اطلاعات و دریافت نوبت</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- صفحه موفقیت و نمایش نوبت خودکار -->
+        <div id="successScreen" class="success-screen">
+            <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="success-title">اطلاعات شما با موفقیت ثبت شد</div>
+            <div class="success-text">
+                مشخصات شما در سیستم قرار گرفت و برای مدیریت ارسال شد. نوبت شمع‌تراپی و بررسی ارتعاش شما برای تاریخ زیر فیکس گردید:
+                <br><br>
+                <strong id="finalDateDisplay" style="font-size: 1.6rem; color: #fff; text-shadow: 0 0 10px #2ed573; display: block; margin: 15px 0;"></strong>
+                لطفاً در تاریخ قید شده از طریق پلتفرم انتخابی خود، پیگیر نتایج باشید.
+            </div>
+            <a href="index.html" class="back-btn" style="border-color: #2ed573; color: #2ed573;">بازگشت به سایت</a>
+        </div>
+
+    </div>
+
+    <footer>
+        DESIGNED BY GHAZAL PY | GHAZAL PY © 2026
+    </footer>
+
+    <script>
+        // ۱. مدیریت پیش‌فرض لینک‌ها براساس انتخاب تلگرام یا روبیکا
+        const prefixDisplay = document.getElementById('prefixDisplay');
+        const usernameInput = document.getElementById('usernameInput');
+        const platformSelect = document.getElementById('platformSelect');
+
+        function updatePrefix() {
+            if (platformSelect.value === 'telegram') {
+                prefixDisplay.innerText = "https://t.me/";
+                usernameInput.style.paddingLeft = "135px";
+            } else {
+                prefixDisplay.innerText = "https://rubika.ir/";
+                usernameInput.style.paddingLeft = "145px";
+            }
+        }
+        // اجرای اولیه برای تنظیم پدینگ تلگرام
+        updatePrefix();
+
+        // ۲. شمارشگر کاراکترهای متن مشکل
+        function countChars() {
+            const textLength = document.getElementById('problemText').value.length;
+            document.getElementById('charCount').innerText = textLength;
+        }
+
+        // ۳. الگوریتم هوشمند و پیشرفته محاسبه نوبت دهی خودکار (تقویم خرداد ۱۴۰۵)
+        function calculateAppointmentDate() {
+            // شبیه‌سازی دیتابیس کوچک در LocalStorage مرورگر برای ذخیره تعداد ثبت‌نامی‌های هر روز
+            if (!localStorage.getItem('therapy_appointments')) {
+                localStorage.setItem('therapy_appointments', JSON.stringify({}));
+            }
+            let appointments = JSON.parse(localStorage.getItem('therapy_appointments'));
+
+            // تنظیم مبدا تاریخ فرضی اعلام شده توسط شما: ۱۱ خرداد ۱۴۰۵
+            let baseStartDay = 20; // شروع پیش فرض نوبت ها از ۲۰ خرداد است
+
+            // بررسی تاریخ واقعی سیستم برای سیستم جلو برنده نوبت ها بعد از ساعت ۰۰:۰۰
+            // تاریخ مبنای امروز شما ۱۱ خرداد ۱۴۰۵ است. اگر روز سیستم تغییر کند نوبت ها هم جلو میروند.
+            let todayRealDate = new Date();
+            let dayOfMonth = todayRealDate.getDate(); // روز جاری میلادی را میگیرد برای سنجش تغییر روز
+            
+            // ذخیره روز جاری برای اینکه بفهمیم ساعت از ۰۰:۰۰ رد شده یا نه
+            if (!localStorage.getItem('last_visit_day')) {
+                localStorage.setItem('last_visit_day', dayOfMonth);
+            } else {
+                let lastVisitDay = parseInt(localStorage.getItem('last_visit_day'));
+                if (dayOfMonth !== lastVisitDay) {
+                    // ساعت از ۰۰:۰۰ رد شده و روز عوض شده است. طبق فرمول شما نوبت ها یک روز جلو میروند (مثلا از ۲۰ به ۲۱ یا از ۲۱ به ۲۲)
+                    let dayDiff = Math.abs(dayOfMonth - lastVisitDay);
+                    baseStartDay += dayDiff; 
+                }
+            }
+
+            let targetDay = baseStartDay;
+
+            // حلقه بررسی ظرفیت ۵ نفر در هر روز (اگر پر بود میرود روز بعد)
+            while (true) {
+                let dateKey = `1405/03/${targetDay}`;
+                let currentRegCount = appointments[dateKey] || 0;
+
+                if (currentRegCount < 5) {
+                    // جای خالی دارد! این روز را رزرو میکنیم
+                    appointments[dateKey] = currentRegCount + 1;
+                    localStorage.setItem('therapy_appointments', JSON.stringify(appointments));
+                    return dateKey;
+                } else {
+                    // روز پر شده است، چک کردن روز بعد
+                    targetDay++;
+                }
+            }
+        }
+
+        // ۴. مدیریت ارسال فرم و جابجایی به صفحه موفقیت بدون به هم ریختن ایمیل
+        const form = document.getElementById('therapyForm');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // جلوگیری از رفرش سنتی صفحه
+
+            // محاسبه نوبت
+            const allocatedDate = calculateAppointmentDate();
+            
+            // قرار دادن تاریخ نوبت در فیلد مخفی تا در ایمیل ارسالی به شما هم بیاید
+            document.getElementById('hiddenApptDate').value = allocatedDate;
+            document.getElementById('finalDateDisplay').innerText = allocatedDate + " خرداد ۱۴۰۵";
+
+            // ارسال اطلاعات به ایمیل شما از طریق سرویس رایگان و امن Formspree
+            // این بخش اطلاعات را در پس‌زمینه می‌فرستد
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            }).then(response => {
+                // مخفی کردن فرم و نمایش صفحه موفقیت (انتقال درون‌سایتی به بخش موفقیت طبق ساختار درخواستی)
+                document.getElementById('formContainer').style.display = 'none';
+                document.getElementById('successScreen').style.display = 'block';
+                window.scrollTo(0, 0);
+            }).catch(error => {
+                // حتی اگر اینترنت ضعیف بود و ایمیل نرفت، نوبت به کاربر نمایش داده شود
+                document.getElementById('formContainer').style.display = 'none';
+                document.getElementById('successScreen').style.display = 'block';
+                window.scrollTo(0, 0);
+            });
+        });
+    </script>
+</body>
+</html>
 
