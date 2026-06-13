@@ -66,6 +66,22 @@
             line-height: 1.8; margin-bottom: 30px;
         }
 
+        .price-badge {
+            background: rgba(0, 255, 255, 0.05); border: 1px dashed var(--neon-cyan);
+            padding: 20px; border-radius: 16px; text-align: justify;
+            color: #fff; margin-bottom: 25px; line-height: 1.8; font-size: 0.95rem;
+        }
+        .price-title {
+            font-size: 1.15rem; font-weight: bold; color: var(--neon-cyan);
+            display: block; margin-bottom: 10px; text-align: center;
+        }
+
+        .warning-badge {
+            background: rgba(255, 71, 87, 0.08); border: 1px solid rgba(255, 71, 87, 0.3);
+            border-right: 4px solid #ff4757; padding: 15px; border-radius: 4px 12px 12px 4px;
+            color: #ffbece; font-size: 0.9rem; margin-bottom: 25px; line-height: 1.8; text-align: justify;
+        }
+
         .form-wrapper {
             background: var(--bg-card); border: 1px solid rgba(255,255,255,0.08);
             border-radius: 24px; padding: 40px; width: 100%; max-width: 600px;
@@ -87,12 +103,6 @@
         input:focus, textarea:focus, select:focus {
             border-color: var(--shaman-color);
             box-shadow: 0 0 15px rgba(224, 86, 253, 0.3);
-        }
-
-        .price-badge {
-            background: rgba(0, 255, 255, 0.1); border: 1px dashed var(--neon-cyan);
-            padding: 15px; border-radius: 12px; text-align: center; font-weight: bold;
-            color: var(--neon-cyan); margin-bottom: 20px; font-size: 1.1rem;
         }
 
         .platform-select-desc {
@@ -124,7 +134,7 @@
             filter: brightness(1.1);
         }
 
-        /* صفحه موفقیت و توضیحات تأکیدی */
+        /* صفحه موفقیت */
         .success-screen {
             display: none; text-align: right; max-width: 600px; width: 100%;
             background: rgba(15, 25, 15, 0.75); border: 1px solid #2ed573;
@@ -181,7 +191,6 @@
 
     <div class="main-container">
         
-        <!-- فرم ثبت نام و ورود اطلاعات -->
         <div id="formContainer" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
             <h1>ثبت مشخصات و رزرو نوبت شمع‌تراپی</h1>
             <div class="form-desc">
@@ -189,8 +198,16 @@
             </div>
 
             <div class="form-wrapper">
+                
+                <!-- بخش ویرایش شده قیمت و توضیحات تکمیلی نیت‌ها و تخفیف سایت -->
                 <div class="price-badge">
-                    <i class="fas fa-credit-card"></i> هزینه خدمات و رزرو نوبت: ۱,۵۰۰,۰۰۰ تومان
+                    <span class="price-title"><i class="fas fa-gift"></i> هزینه خدمات و رزرو نوبت: ۱,۵۰۰,۰۰۰ تومان</span>
+                    برای هر نیتی که داشته باشید، اعم از <strong>پاکسازی، جذب کراش، بازگشت معشوق و انواع شمع‌تراپی‌ها</strong>، در هر صورت برای هر نفر فقط همین مبلغ دریافت می‌شود. این یک هدیه و تخفیف ویژه اختصاصی برای افرادی است که ثبت‌نام خود را از طریق وب‌سایت انجام می‌دهند.
+                </div>
+
+                <!-- باکس هشدار روابط نامشروع و جدایی -->
+                <div class="warning-badge">
+                    <i class="fas fa-exclamation-circle"></i> <strong>توجه مهم:</strong> در مورد روابط حرام مثل جدایی انداختن و یا روابط نامشروع، لطفا به هیچ عنوان از طریق سایت ثبت‌نام نفرمایید و جهت بررسی شرایط مستقیماً با خود ادمین‌ها ارتباط برقرار کنید.
                 </div>
                 
                 <form id="therapyForm" action="https://formspree.io/f/tjsbneh@gmail.com" method="POST">
@@ -250,7 +267,7 @@
             </div>
         </div>
 
-        <!-- صفحه رسید پرداخت، کد رهگیری و توضیحات تاکیدی شمع تراپی -->
+        <!-- صفحه موفقیت -->
         <div id="successScreen" class="success-screen">
             <div class="success-header">
                 <div class="success-icon"><i class="fas fa-check-circle"></i></div>
@@ -355,11 +372,9 @@
             return `${targetDay} تیر ۱۴۰۵`;
         }
 
-        // بررسی اینکه آیا کاربر از درگاه پرداخت برگشته است یا خیر
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('payment') === 'success') {
-                // اگر پارامتر موفقیت پرداخت در لینک بود، کد رهگیری و نوبت ذخیره شده را نشان بده
                 document.getElementById('txtTrackingCode').innerText = localStorage.getItem('last_track_code') || generateTrackingCode();
                 document.getElementById('finalDateDisplay').innerText = localStorage.getItem('last_appt_date') || "۶ تیر ۱۴۰۵";
                 
@@ -381,21 +396,16 @@
             document.getElementById('hiddenTrackingCode').value = trackingCode;
             document.getElementById('hiddenApptDate').value = allocatedDate;
 
-            // ذخیره موقت در مرورگر مشتری برای نمایش پس از بازگشت از درگاه پرداخت
             localStorage.setItem('last_track_code', trackingCode);
             localStorage.setItem('last_appt_date', allocatedDate);
 
-            // ارسال اطلاعات به جیمیل شما
             fetch(form.action, {
                 method: 'POST',
                 body: new FormData(form),
                 headers: { 'Accept': 'application/json' }
             }).then(response => {
-                // انتقال فوری به لینک پرداخت اختصاصی شما پس از ارسال موفق اطلاعات به جیمیل
-                // یک پارامتر تستی اضافه کردیم تا پس از پرداخت موفق، سیستم رسید را فعال کند
                 window.location.href = "https://pay.ghazalpy.ir/link/772134?callback=" + encodeURIComponent(window.location.href + "?payment=success");
             }).catch(error => {
-                // در صورت بروز هرگونه اختلال در اتصال، جهت جلوگیری از پرش مشتری، باز هم او را به درگاه بفرست
                 window.location.href = "https://pay.ghazalpy.ir/link/772134?callback=" + encodeURIComponent(window.location.href + "?payment=success");
             });
         });
