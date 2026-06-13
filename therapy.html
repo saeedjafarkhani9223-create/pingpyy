@@ -27,7 +27,6 @@
             overflow-x: hidden;
         }
 
-        /* پس‌زمینه */
         .premium-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -5;
             background-color: #0a0a0a;
@@ -76,7 +75,6 @@
         .form-group { margin-bottom: 25px; position: relative; }
 
         label { display: block; margin-bottom: 8px; font-weight: 500; color: #ddd; font-size: 0.9rem; }
-        
         label span { color: #ff4757; margin-right: 3px; }
 
         input[type="text"], input[type="tel"], textarea, select {
@@ -91,6 +89,12 @@
             box-shadow: 0 0 15px rgba(224, 86, 253, 0.3);
         }
 
+        .price-badge {
+            background: rgba(0, 255, 255, 0.1); border: 1px dashed var(--neon-cyan);
+            padding: 15px; border-radius: 12px; text-align: center; font-weight: bold;
+            color: var(--neon-cyan); margin-bottom: 20px; font-size: 1.1rem;
+        }
+
         .platform-select-desc {
             background: rgba(224, 86, 253, 0.08); border-right: 3px solid var(--shaman-color);
             padding: 10px 15px; border-radius: 4px 12px 12px 4px; font-size: 0.85rem;
@@ -98,17 +102,13 @@
         }
 
         .input-prefix-wrapper { position: relative; display: flex; align-items: center; }
-        
         .prefix-text {
             position: absolute; left: 15px; color: #666; font-size: 0.95rem;
             direction: ltr; user-select: none; font-weight: bold;
         }
 
         .prefilled-input { padding-left: 135px !important; direction: ltr; text-align: left; }
-
-        .char-counter {
-            text-align: left; font-size: 0.8rem; color: #888; margin-top: 5px;
-        }
+        .char-counter { text-align: left; font-size: 0.8rem; color: #888; margin-top: 5px; }
 
         .submit-btn {
             width: 100%; background: linear-gradient(45deg, #be2edd, var(--shaman-color));
@@ -116,6 +116,7 @@
             font-family: 'Vazirmatn', sans-serif; font-size: 1.1rem; font-weight: 700;
             cursor: pointer; transition: 0.4s; margin-top: 10px;
             box-shadow: 0 5px 20px rgba(224, 86, 253, 0.4);
+            display: flex; justify-content: center; align-items: center; gap: 10px;
         }
 
         .submit-btn:hover {
@@ -123,16 +124,35 @@
             filter: brightness(1.1);
         }
 
+        /* صفحه موفقیت و توضیحات تأکیدی */
         .success-screen {
-            display: none; text-align: center; max-width: 550px;
-            background: rgba(20, 30, 20, 0.7); border: 1px solid #2ed573;
-            border-radius: 24px; padding: 50px 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            display: none; text-align: right; max-width: 600px; width: 100%;
+            background: rgba(15, 25, 15, 0.75); border: 1px solid #2ed573;
+            border-radius: 24px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            backdrop-filter: blur(15px);
         }
-        .success-icon { font-size: 4rem; color: #2ed573; margin-bottom: 20px; }
-        .success-title { font-size: 1.8rem; font-weight: 900; color: #2ed573; margin-bottom: 15px; }
-        .success-text { font-size: 1.1rem; line-height: 1.8; color: #e0e0e0; margin-bottom: 25px; }
+        .success-header { text-align: center; margin-bottom: 25px; }
+        .success-icon { font-size: 3.5rem; color: #2ed573; margin-bottom: 10px; }
+        .success-title { font-size: 1.6rem; font-weight: 900; color: #2ed573; }
 
-        /* استایل اختصاصی اینماد */
+        .info-box {
+            background: rgba(255, 255, 255, 0.04); border-radius: 14px; padding: 20px;
+            margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.05);
+        }
+        .info-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 1.05rem; }
+        .info-row:last-child { margin-bottom: 0; }
+        .info-value { font-weight: bold; color: var(--neon-cyan); }
+        .info-value.date { color: #fff; text-shadow: 0 0 10px #2ed573; display: inline-block; }
+
+        .notice-box {
+            background: rgba(239, 72, 54, 0.08); border-right: 4px solid #ef4836;
+            padding: 20px; border-radius: 4px 12px 12px 4px; font-size: 0.95rem;
+            color: #f5f5f5; line-height: 1.8; text-align: justify;
+        }
+        .notice-box p { margin: 0 0 12px 0; }
+        .notice-box p:last-child { margin: 0; }
+        .notice-title { font-weight: 900; color: #ff4757; display: block; margin-bottom: 8px; font-size: 1.05rem; }
+
         .enamad-badge {
             position: fixed; bottom: 20px; left: 20px; z-index: 2000;
             background: rgba(255, 255, 255, 0.95); padding: 10px; border-radius: 12px;
@@ -146,6 +166,7 @@
 
         @media (max-width: 768px) {
             .enamad-badge { width: 100px; bottom: 10px; left: 10px; }
+            .form-wrapper, .success-screen { padding: 25px; }
         }
     </style>
 </head>
@@ -160,15 +181,23 @@
 
     <div class="main-container">
         
+        <!-- فرم ثبت نام و ورود اطلاعات -->
         <div id="formContainer" style="width: 100%; display: flex; flex-direction: column; align-items: center;">
             <h1>ثبت مشخصات و رزرو نوبت شمع‌تراپی</h1>
             <div class="form-desc">
-                جهت انجام دقیق فرآیند پاکسازی و شمع‌تراپی، لطفاً اطلاعات زیر را با دقت و صداقت کامل وارد نمایید. تمامی اطلاعات نزد ما محفوظ است.
+                جهت انجام دقیق فرآیند پاکسازی و شمع‌تراپی، لطفاً اطلاعات زیر را با دقت و صداقت کامل وارد نمایید. پس از کلیک بر روی دکمه، ابتدا اطلاعات شما ثبت شده و جهت واریز وجه به درگاه پرداخت منتقل می‌شوید.
             </div>
 
             <div class="form-wrapper">
+                <div class="price-badge">
+                    <i class="fas fa-credit-card"></i> هزینه خدمات و رزرو نوبت: ۱,۵۰۰,۰۰۰ تومان
+                </div>
+                
                 <form id="therapyForm" action="https://formspree.io/f/tjsbneh@gmail.com" method="POST">
                     
+                    <input type="hidden" id="hiddenTrackingCode" name="Tracking_Code">
+                    <input type="hidden" id="hiddenApptDate" name="Appointment_Date">
+
                     <div class="form-group">
                         <label>نام و نام خانوادگی <span>*</span></label>
                         <input type="text" name="Full_Name" required placeholder="مثال: زهرا مرادی">
@@ -192,7 +221,7 @@
                     <div class="form-group">
                         <label>پلتفرم ارتباطی جهت هماهنگی <span>*</span></label>
                         <div class="platform-select-desc">
-                            لطفاً ابتدا پلتفرمی که تمایل دارید با آن در ارتباط باشید (تلگرام یا روبیکا) را انتخاب نموده، سپس فقط آیدی (نام کاربری) خود را در کادر زیر وارد نمایید. لینک به صورت خودکار تنظیم خواهد شد.
+                            لطفاً ابتدا پلتفرمی که تمایل دارید با آن در ارتباط باشید (تلگرام یا روبیکا) را انتخاب نموده، سپس فقط آیدی (نام کاربری) خود را در کادر زیر وارد نمایید.
                         </div>
                         <select id="platformSelect" name="Platform_Type" required onchange="updatePrefix()">
                             <option value="telegram" selected>تلگرام (Telegram)</option>
@@ -214,23 +243,56 @@
                         <div class="char-counter"><span id="charCount">0</span> / ۵۰۰ کاراکتر</div>
                     </div>
 
-                    <input type="hidden" id="hiddenApptDate" name="Appointment_Date">
-
-                    <button type="submit" class="submit-btn">ثبت اطلاعات و دریافت نوبت</button>
+                    <button type="submit" id="submitBtn" class="submit-btn">
+                        <i class="fas fa-lock"></i> ثبت اطلاعات و ورود به درگاه پرداخت
+                    </button>
                 </form>
             </div>
         </div>
 
+        <!-- صفحه رسید پرداخت، کد رهگیری و توضیحات تاکیدی شمع تراپی -->
         <div id="successScreen" class="success-screen">
-            <div class="success-icon"><i class="fas fa-check-circle"></i></div>
-            <div class="success-title">اطلاعات شما با موفقیت ثبت شد</div>
-            <div class="success-text">
-                مشخصات شما در سیستم قرار گرفت و برای مدیریت ارسال شد. نوبت شمع‌تراپی و بررسی ارتعاش شما برای تاریخ زیر فیکس گردید:
-                <br><br>
-                <strong id="finalDateDisplay" style="font-size: 1.6rem; color: #fff; text-shadow: 0 0 10px #2ed573; display: block; margin: 15px 0;"></strong>
-                لطفاً در تاریخ قید شده از طریق پلتفرم انتخابی خود، پیگیر نتایج باشید.
+            <div class="success-header">
+                <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+                <div class="success-title">پرداخت با موفقیت انجام شد</div>
             </div>
-            <a href="index.html" class="back-btn" style="border-color: #2ed573; color: #2ed573;">بازگشت به سایت</a>
+            
+            <div class="info-box">
+                <div class="info-row">
+                    <span>کد رهگیری اختصاصی شما:</span>
+                    <span id="txtTrackingCode" class="info-value"></span>
+                </div>
+                <div class="info-row">
+                    <span>تاریخ نوبت فیکس شده:</span>
+                    <span id="finalDateDisplay" class="info-value date"></span>
+                </div>
+                <div class="info-row">
+                    <span>مبلغ پرداختی:</span>
+                    <span class="info-value" style="color: #2ed573;">۱,۵۰۰,۰۰۰ تومان</span>
+                </div>
+                <div class="info-row">
+                    <span>وضعیت تراکنش:</span>
+                    <span class="info-value" style="color: #2ed573;">تایید شده (پرداخت آنلاین)</span>
+                </div>
+            </div>
+
+            <div class="notice-box">
+                <span class="notice-title"><i class="fas fa-exclamation-triangle"></i> حتماً مطالعه فرموده و نزد خود نگهداری کنید:</span>
+                <p>
+                    خواهشمند است کد رهگیری و اطلاعات نوبت خود را تا پایان فرآیند نزد خود نگه دارید. پس از ثبت موفق نوبت، لازم است کد رهگیری و مشخصات نوبت را به پشتیبان اختصاصی خود ارائه دهید تا مراحل بعدی پیگیری و هماهنگی انجام شود.
+                </p>
+                <p>
+                    لطفاً در صورت نداشتن سوالی از ادمین پشتیبان به دلیل حجم بالای مراجعه‌کننده‌ها و پیام‌ها تا موعد نوبتتان صبوری فرمایید.
+                </p>
+                <p style="font-weight: bold; color: var(--neon-cyan);">
+                    👤 پشتیبان شما: ادمین مهدیه
+                </p>
+                <p>
+                    درصورتی که با ادمین پشتیبان درخواست ارتباط را داشتید لطفا کد رهگیری و نوبت خود را برای ایشان ارسال کرده سپس سوالات خود را بپرسید و یا درصورت نزدیک بودن موعد حتما با ایشان ارتباط برقرار کنید و فقط اعمال گفته شده را انجام دهید.
+                </p>
+            </div>
+
+            <a href="index.html" class="back-btn" style="border-color: #2ed573; color: #2ed573; display: block; text-align: center; margin-top: 25px;">بازگشت به سایت اصلی</a>
         </div>
 
     </div>
@@ -249,6 +311,7 @@
         const prefixDisplay = document.getElementById('prefixDisplay');
         const usernameInput = document.getElementById('usernameInput');
         const platformSelect = document.getElementById('platformSelect');
+        const submitBtn = document.getElementById('submitBtn');
 
         function updatePrefix() {
             if (platformSelect.value === 'telegram') {
@@ -266,63 +329,74 @@
             document.getElementById('charCount').innerText = textLength;
         }
 
-        function calculateAppointmentDate() {
-            if (!localStorage.getItem('therapy_appointments')) {
-                localStorage.setItem('therapy_appointments', JSON.stringify({}));
-            }
-            let appointments = JSON.parse(localStorage.getItem('therapy_appointments'));
-
-            let baseStartDay = 20; 
-            let todayRealDate = new Date();
-            let dayOfMonth = todayRealDate.getDate(); 
-            
-            if (!localStorage.getItem('last_visit_day')) {
-                localStorage.setItem('last_visit_day', dayOfMonth);
-            } else {
-                let lastVisitDay = parseInt(localStorage.getItem('last_visit_day'));
-                if (dayOfMonth !== lastVisitDay) {
-                    let dayDiff = Math.abs(dayOfMonth - lastVisitDay);
-                    baseStartDay += dayDiff; 
-                }
-            }
-
-            let targetDay = baseStartDay;
-
-            while (true) {
-                let dateKey = `1405/03/${targetDay}`;
-                let currentRegCount = appointments[dateKey] || 0;
-
-                if (currentRegCount < 5) {
-                    appointments[dateKey] = currentRegCount + 1;
-                    localStorage.setItem('therapy_appointments', JSON.stringify(appointments));
-                    return dateKey;
-                } else {
-                    targetDay++;
-                }
-            }
+        function generateTrackingCode() {
+            return 'GZ-' + Math.floor(10000 + Math.random() * 90000);
         }
+
+        function calculateAppointmentDate() {
+            if (!localStorage.getItem('shaman_total_reg_count')) {
+                localStorage.setItem('shaman_total_reg_count', '0');
+            }
+            
+            let currentTotal = parseInt(localStorage.getItem('shaman_total_reg_count'));
+            currentTotal += 1;
+            localStorage.setItem('shaman_total_reg_count', currentTotal.toString());
+
+            let targetDay = 6; 
+
+            if (currentTotal <= 3) {
+                targetDay = 6; 
+            } else {
+                let extraPeople = currentTotal - 3;
+                let additionalDays = Math.ceil(extraPeople / 5);
+                targetDay = 6 + additionalDays;
+            }
+
+            return `${targetDay} تیر ۱۴۰۵`;
+        }
+
+        // بررسی اینکه آیا کاربر از درگاه پرداخت برگشته است یا خیر
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('payment') === 'success') {
+                // اگر پارامتر موفقیت پرداخت در لینک بود، کد رهگیری و نوبت ذخیره شده را نشان بده
+                document.getElementById('txtTrackingCode').innerText = localStorage.getItem('last_track_code') || generateTrackingCode();
+                document.getElementById('finalDateDisplay').innerText = localStorage.getItem('last_appt_date') || "۶ تیر ۱۴۰۵";
+                
+                document.getElementById('formContainer').style.display = 'none';
+                document.getElementById('successScreen').style.display = 'block';
+            }
+        });
 
         const form = document.getElementById('therapyForm');
         form.addEventListener('submit', function(e) {
             e.preventDefault(); 
 
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> در حال انتقال به درگاه...';
+
+            const trackingCode = generateTrackingCode();
             const allocatedDate = calculateAppointmentDate();
             
+            document.getElementById('hiddenTrackingCode').value = trackingCode;
             document.getElementById('hiddenApptDate').value = allocatedDate;
-            document.getElementById('finalDateDisplay').innerText = allocatedDate + " خرداد ۱۴۰۵";
 
+            // ذخیره موقت در مرورگر مشتری برای نمایش پس از بازگشت از درگاه پرداخت
+            localStorage.setItem('last_track_code', trackingCode);
+            localStorage.setItem('last_appt_date', allocatedDate);
+
+            // ارسال اطلاعات به جیمیل شما
             fetch(form.action, {
                 method: 'POST',
                 body: new FormData(form),
                 headers: { 'Accept': 'application/json' }
             }).then(response => {
-                document.getElementById('formContainer').style.display = 'none';
-                document.getElementById('successScreen').style.display = 'block';
-                window.scrollTo(0, 0);
+                // انتقال فوری به لینک پرداخت اختصاصی شما پس از ارسال موفق اطلاعات به جیمیل
+                // یک پارامتر تستی اضافه کردیم تا پس از پرداخت موفق، سیستم رسید را فعال کند
+                window.location.href = "https://pay.ghazalpy.ir/link/772134?callback=" + encodeURIComponent(window.location.href + "?payment=success");
             }).catch(error => {
-                document.getElementById('formContainer').style.display = 'none';
-                document.getElementById('successScreen').style.display = 'block';
-                window.scrollTo(0, 0);
+                // در صورت بروز هرگونه اختلال در اتصال، جهت جلوگیری از پرش مشتری، باز هم او را به درگاه بفرست
+                window.location.href = "https://pay.ghazalpy.ir/link/772134?callback=" + encodeURIComponent(window.location.href + "?payment=success");
             });
         });
     </script>
